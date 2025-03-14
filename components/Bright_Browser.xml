@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="Bright_Browser" extends="Scene">
+
+    <children>
+        <Group id="Bright_Browser">
+        </Group>
+    </children>
+    
+    <script type="text/brightscript" uri="pkg:/components/Essentials.brs"/>
+    <script type="text/brightscript" uri="pkg:/components/CSS.brs"/>
+    <script type="text/brightscript" uri="pkg:/components/HTML.brs"/>
+    <script type="text/brightscript" uri="pkg:/components/Interpreter.brs"/>
+    <script type="text/brightscript" uri="pkg:/components/JavaScript_Callbacks.brs"/>
+    <script type="text/brightscript" uri="pkg:/components/JavaScript.brs"/>
+    <script type="text/brightscript" uri="pkg:/components/JSON.brs"/>
+    <script type="text/brightscript" uri="pkg:/components/Tools.brs"/>
+    <script type="text/brightscript" uri="pkg:/components/BrightBrowser.brs"/>
+    
+    <script type="text/brightscript">
+    <![CDATA[
+
+        function init()
+            print "init()"
+            getInfo()
+            applyDefaultLayout()
+
+            m.readXMLContentTask = createObject("roSGNode", "ContentReader")
+            m.readXMLContentTask.observeField("content", "setcontent")
+            m.readXMLContentTask.observeField("data", "setData")
+            m.readXMLContentTask.contenturi = "http://www.sdktestinglab.com/Tutorial/content/xmlcontent.xml"
+            m.readXMLContentTask.control = "RUN"
+
+
+            print "Initializing Bright_Browser component."
+            
+        end function
+       
+    ]]>
+    </script>
+
+
+</component>

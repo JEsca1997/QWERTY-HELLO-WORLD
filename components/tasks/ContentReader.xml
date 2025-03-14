@@ -1,0 +1,30 @@
+<component name = "ContentReader" extends = "Task" >
+ 
+<interface>
+    <field id="contenturi" type="uri" />
+    <field id="content" type="node" />
+    <field id="data" type="string"/>
+</interface>
+
+
+      <children>
+    </children>
+
+  <script type="text/brightscript" uri="pkg:/components/tasks/Scraper.brs"/>
+ <!-- <script type="text/brightscript" uri="pkg:/components/Bright_Browser.xml"/> -->
+ 
+  <script type = "text/brightscript" >
+ 
+    <![CDATA[
+ 
+    sub init()
+
+      m.top.functionName = "getcontent"
+      
+    end sub
+ 
+    ]]>
+ 
+  </script>
+ 
+</component>
