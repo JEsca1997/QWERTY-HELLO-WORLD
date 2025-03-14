@@ -1,0 +1,54 @@
+Roku's SceneGraph framework provides a variety of elements that you can use to create user interfaces for your Roku channels. Here are some of the key scenegraph elements:
+
+Basic Elements
+<component>: The root element for defining a SceneGraph component.
+
+<interface>: Defines the interface for a component.
+
+<container>: A container element that can hold other elements.
+
+<image>: Displays an image.
+
+<text>: Displays text.
+
+<button>: A clickable button element.
+
+<list>: Displays a list of items.
+
+<grid>: Displays items in a grid layout.
+
+<video>: Plays a video.
+
+<audio>: Plays audio.
+
+<canvas>: A drawing surface for custom graphics.
+
+Advanced Elements
+<scrollbar>: Adds a scrollbar to a container.
+
+<progress>: Displays a progress bar.
+
+<slider>: Adds a slider control.
+
+<checkbox>: Adds a checkbox element.
+
+<radiobutton>: Adds a radio button element.
+
+<dropdown>: Adds a dropdown menu.
+
+<spinner>: Adds a spinner control for input.
+
+<input>: Adds an input field for text.
+
+Layout Elements
+<row>: Defines a row in a grid or list.
+
+<column>: Defines a column in a grid or list.
+
+<stack>: Stacks elements vertically.
+
+<absolute>: Positions elements absolutely within a container.
+
+These elements can be combined and customized using XML and BrightScript to create rich and interactive user interfaces for Roku channels.
+
+Would you like more details on any specific element or how to use them?

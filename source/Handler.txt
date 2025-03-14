@@ -1,0 +1,4502 @@
+' Function to render the HTML tree into SceneGraph nodes
+function renderHTMLTree(htmlTree as Object, parentNode as Object, yPosition as Integer) as Integer
+    nodes = htmlTree.nodes
+
+    for each node in nodes
+        if node.type = "text" then
+            cleanedText = node.content
+
+            ' Split the text into chunks if necessary
+            maxChunkLength = 500  ' Adjust as needed
+            textChunks = splitTextIntoChunks(cleanedText, maxChunkLength)
+
+            ' For each chunk, call the text callback function
+            for each chunk in textChunks
+                yPosition = textCallback(chunk, yPosition, parentNode)
+            end for
+
+        else if node.type = "a" then
+            yPosition = linkCallback(node, yPosition, parentNode)
+
+        else if node.type = "abbr" then
+            yPosition = abbrCallback(node, yPosition, parentNode)
+
+        else if node.type = "acronym" then
+            yPosition = acronymCallback(node, yPosition, parentNode)
+
+        else if node.type = "address" then
+            yPosition = addressCallback(node, yPosition, parentNode)
+
+        else if node.type = "applet" then
+            yPosition = appletCallback(node, yPosition, parentNode)
+
+        else if node.type = "area" then
+            yPosition = areaCallback(node, yPosition, parentNode)
+
+        else if node.type = "article" then
+            yPosition = articleCallback(node, yPosition, parentNode)
+
+        else if node.type = "aside" then
+            yPosition = asideCallback(node, yPosition, parentNode)
+
+        else if node.type = "audio" then
+            yPosition = audioCallback(node, yPosition, parentNode)
+
+        else if node.type = "b" then
+            yPosition = bCallback(node, yPosition, parentNode)
+
+        else if node.type = "base" then
+            yPosition = baseCallback(node, yPosition, parentNode)
+
+        else if node.type = "basefont" then
+            yPosition = basefontCallback(node, yPosition, parentNode)
+
+        else if node.type = "bdi" then
+            yPosition = bdiCallback(node, yPosition, parentNode)
+
+        else if node.type = "bdo" then
+            yPosition = bdoCallback(node, yPosition, parentNode)
+
+        else if node.type = "bgsound" then
+            yPosition = bgsoundCallback(node, yPosition, parentNode)
+
+        else if node.type = "big" then
+            yPosition = bigCallback(node, yPosition, parentNode)
+
+        else if node.type = "blink" then
+            yPosition = blinkCallback(node, yPosition, parentNode)
+
+        else if node.type = "blockquote" then
+            yPosition = blockquoteCallback(node, yPosition, parentNode)
+
+        else if node.type = "body" then
+            yPosition = bodyCallback(node, yPosition, parentNode)
+
+        else if node.type = "br" then
+            yPosition = brCallback(node, yPosition, parentNode)
+
+        else if node.type = "button" then
+            yPosition = buttonCallback(node, yPosition, parentNode)
+
+        else if node.type = "canvas" then
+            yPosition = canvasCallback(node, yPosition, parentNode)
+
+        else if node.type = "caption" then
+            yPosition = captionCallback(node, yPosition, parentNode)
+
+        else if node.type = "center" then
+            yPosition = centerCallback(node, yPosition, parentNode)
+
+        else if node.type = "cite" then
+            yPosition = citeCallback(node, yPosition, parentNode)
+
+        else if node.type = "code" then
+            yPosition = codeCallback(node, yPosition, parentNode)
+
+        else if node.type = "col" then
+            yPosition = colCallback(node, yPosition, parentNode)
+
+        else if node.type = "colgroup" then
+            yPosition = colgroupCallback(node, yPosition, parentNode)
+
+        else if node.type = "data" then
+            yPosition = dataCallback(node, yPosition, parentNode)
+
+        else if node.type = "datalist" then
+            yPosition = datalistCallback(node, yPosition, parentNode)
+
+        else if node.type = "dd" then
+            yPosition = ddCallback(node, yPosition, parentNode)
+
+        else if node.type = "del" then
+            yPosition = delCallback(node, yPosition, parentNode)
+
+        else if node.type = "details" then
+            yPosition = detailsCallback(node, yPosition, parentNode)
+
+        else if node.type = "dfn" then
+            yPosition = dfnCallback(node, yPosition, parentNode)
+
+        else if node.type = "dialog" then
+            yPosition = dialogCallback(node, yPosition, parentNode)
+
+        else if node.type = "dir" then
+            yPosition = dirCallback(node, yPosition, parentNode)
+
+        else if node.type = "div" then
+            yPosition = divCallback(node, yPosition, parentNode)
+
+        else if node.type = "dl" then
+            yPosition = dlCallback(node, yPosition, parentNode)
+
+        else if node.type = "dt" then
+            yPosition = dtCallback(node, yPosition, parentNode)
+
+        else if node.type = "em" then
+            yPosition = emCallback(node, yPosition, parentNode)
+
+        else if node.type = "embed" then
+            yPosition = embedCallback(node, yPosition, parentNode)
+
+        else if node.type = "fieldset" then
+            yPosition = fieldsetCallback(node, yPosition, parentNode)
+
+        else if node.type = "figcaption" then
+            yPosition = figcaptionCallback(node, yPosition, parentNode)
+
+        else if node.type = "figure" then
+            yPosition = figureCallback(node, yPosition, parentNode)
+
+        else if node.type = "font" then
+            yPosition = fontCallback(node, yPosition, parentNode)
+
+        else if node.type = "footer" then
+            yPosition = footerCallback(node, yPosition, parentNode)
+
+        else if node.type = "form" then
+            yPosition = formCallback(node, yPosition, parentNode)
+
+        else if node.type = "frame" then
+            yPosition = frameCallback(node, yPosition, parentNode)
+
+        else if node.type = "frameset" then
+            yPosition = framesetCallback(node, yPosition, parentNode)
+
+        else if node.type = "h1" then
+            yPosition = headerCallback(node, yPosition, parentNode)
+
+        else if node.type = "h2" then
+            yPosition = headerCallback(node, yPosition, parentNode)
+
+        else if node.type = "h3" then
+            yPosition = headerCallback(node, yPosition, parentNode)
+
+        else if node.type = "h4" then
+            yPosition = headerCallback(node, yPosition, parentNode)
+
+        else if node.type = "h5" then
+            yPosition = headerCallback(node, yPosition, parentNode)
+
+        else if node.type = "h6" then
+            yPosition = headerCallback(node, yPosition, parentNode)
+
+        else if node.type = "head" then
+            yPosition = headCallback(node, yPosition, parentNode)
+
+        else if node.type = "header" then
+            yPosition = headerCallback(node, yPosition, parentNode)
+
+        else if node.type = "hr" then
+            yPosition = hrCallback(node, yPosition, parentNode)
+
+        else if node.type = "html" then
+            yPosition = htmlCallback(node, yPosition, parentNode)
+
+        else if node.type = "i" then
+            yPosition = iCallback(node, yPosition, parentNode)
+
+        else if node.type = "iframe" then
+            yPosition = iframeCallback(node, yPosition, parentNode)
+
+        else if node.type = "img" then
+            yPosition = imageCallback(node, yPosition, parentNode)
+
+        else if node.type = "input" then
+            yPosition = inputCallback(node, yPosition, parentNode)
+
+        else if node.type = "ins" then
+            yPosition = insCallback(node, yPosition, parentNode)
+
+        else if node.type = "isindex" then
+            yPosition = isindexCallback(node, yPosition, parentNode)
+
+        else if node.type = "kbd" then
+            yPosition = kbdCallback(node, yPosition, parentNode)
+
+        else if node.type = "keygen" then
+            yPosition = keygenCallback(node, yPosition, parentNode)
+
+        else if node.type = "label" then
+            yPosition = labelCallback(node, yPosition, parentNode)
+
+        else if node.type = "legend" then
+            yPosition = legendCallback(node, yPosition, parentNode)
+
+        else if node.type = "li" then
+            yPosition = liCallback(node, yPosition, parentNode)
+
+        else if node.type = "link" then
+            yPosition = linkCallback(node, yPosition, parentNode)
+
+        else if node.type = "main" then
+            yPosition = mainCallback(node, yPosition, parentNode)
+
+        else if node.type = "map" then
+            yPosition = mapCallback(node, yPosition, parentNode)
+
+        else if node.type = "mark" then
+            yPosition = markCallback(node, yPosition, parentNode)
+
+        else if node.type = "marquee" then
+            yPosition = marqueeCallback(node, yPosition, parentNode)
+
+        else if node.type = "menu" then
+            yPosition = menuCallback(node, yPosition, parentNode)
+
+        else if node.type = "menuitem" then
+            yPosition = menuitemCallback(node, yPosition, parentNode)
+
+        else if node.type = "meta" then
+            yPosition = metaCallback(node, yPosition, parentNode)
+
+        else if node.type = "meter" then
+            yPosition = meterCallback(node, yPosition, parentNode)
+
+        else if node.type = "nav" then
+            yPosition = navCallback(node, yPosition, parentNode)
+
+        else if node.type = "nobr" then
+            yPosition = nobrCallback(node, yPosition, parentNode)
+
+        else if node.type = "noembed" then
+            yPosition = noembedCallback(node, yPosition, parentNode)
+
+        else if node.type = "noframes" then
+            yPosition = noframesCallback(node, yPosition, parentNode)
+
+        else if node.type = "noscript" then
+            yPosition = noscriptCallback(node, yPosition, parentNode)
+
+        else if node.type = "object" then
+            yPosition = objectCallback(node, yPosition, parentNode)
+
+        else if node.type = "ol" then
+            yPosition = olCallback(node, yPosition, parentNode)
+
+        else if node.type = "optgroup" then
+            yPosition = optgroupCallback(node, yPosition, parentNode)
+
+        else if node.type = "option" then
+            yPosition = optionCallback(node, yPosition, parentNode)
+
+        else if node.type = "output" then
+            yPosition = outputCallback(node, yPosition, parentNode)
+
+        else if node.type = "p" then
+            yPosition = paragraphCallback(node, yPosition, parentNode)
+
+        else if node.type = "param" then
+            yPosition = paramCallback(node, yPosition, parentNode)
+
+        else if node.type = "picture" then
+            yPosition = pictureCallback(node, yPosition, parentNode)
+
+        else if node.type = "plaintext" then
+            yPosition = plaintextCallback(node, yPosition, parentNode)
+
+        else if node.type = "pre" then
+            yPosition = preCallback(node, yPosition, parentNode)
+
+        else if node.type = "progress" then
+            yPosition = progressCallback(node, yPosition, parentNode)
+
+        else if node.type = "q" then
+            yPosition = qCallback(node, yPosition, parentNode)
+
+        else if node.type = "rb" then
+            yPosition = rbCallback(node, yPosition, parentNode)
+
+        else if node.type = "rp" then
+            yPosition = rpCallback(node, yPosition, parentNode)
+
+        else if node.type = "rt" then
+            yPosition = rtCallback(node, yPosition, parentNode)
+
+        else if node.type = "rtc" then
+            yPosition = rtcCallback(node, yPosition, parentNode)
+
+        else if node.type = "ruby" then
+            yPosition = rubyCallback(node, yPosition, parentNode)
+
+        else if node.type = "s" then
+            yPosition = sCallback(node, yPosition, parentNode)
+
+        else if node.type = "samp" then
+            yPosition = sampCallback(node, yPosition, parentNode)
+
+        else if node.type = "script" then
+            yPosition = scriptCallback(node, yPosition, parentNode)
+
+        else if node.type = "section" then
+            yPosition = sectionCallback(node, yPosition, parentNode)
+
+        else if node.type = "select" then
+            yPosition = selectCallback(node, yPosition, parentNode)
+
+        else if node.type = "slot" then
+            yPosition = slotCallback(node, yPosition, parentNode)
+
+        else if node.type = "small" then
+            yPosition = smallCallback(node, yPosition, parentNode)
+
+        else if node.type = "source" then
+            yPosition = sourceCallback(node, yPosition, parentNode)
+
+        else if node.type = "span" then
+            yPosition = spanCallback(node, yPosition, parentNode)
+
+        else if node.type = "strike" then
+            yPosition = strikeCallback(node, yPosition, parentNode)
+
+        else if node.type = "strong" then
+            yPosition = strongCallback(node, yPosition, parentNode)
+
+        else if node.type = "style" then
+            yPosition = styleCallback(node, yPosition, parentNode)
+
+        else if node.type = "sub" then
+            yPosition = subCallback(node, yPosition, parentNode)
+
+        else if node.type = "summary" then
+            yPosition = summaryCallback(node, yPosition, parentNode)
+
+        else if node.type = "sup" then
+            yPosition = supCallback(node, yPosition, parentNode)
+
+        else if node.type = "svg" then
+            yPosition = svgCallback(node, yPosition, parentNode)
+
+        else if node.type = "table" then
+            yPosition = tableCallback(node, yPosition, parentNode)
+
+        else if node.type = "tbody" then
+            yPosition = tbodyCallback(node, yPosition, parentNode)
+
+        else if node.type = "td" then
+            yPosition = tdCallback(node, yPosition, parentNode)
+
+        else if node.type = "template" then
+            yPosition = templateCallback(node, yPosition, parentNode)
+
+        else if node.type = "textarea" then
+            yPosition = textareaCallback(node, yPosition, parentNode)
+
+        else if node.type = "tfoot" then
+            yPosition = tfootCallback(node, yPosition, parentNode)
+
+        else if node.type = "th" then
+            yPosition = thCallback(node, yPosition, parentNode)
+
+        else if node.type = "thead" then
+            yPosition = theadCallback(node, yPosition, parentNode)
+
+        else if node.type = "time" then
+            yPosition = timeCallback(node, yPosition, parentNode)
+
+        else if node.type = "title" then
+            yPosition = titleCallback(node, yPosition, parentNode)
+
+        else if node.type = "tr" then
+            yPosition = trCallback(node, yPosition, parentNode)
+
+        else if node.type = "track" then
+            yPosition = trackCallback(node, yPosition, parentNode)
+
+        else if node.type = "tt" then
+            yPosition = ttCallback(node, yPosition, parentNode)
+
+        else if node.type = "u" then
+            yPosition = uCallback(node, yPosition, parentNode)
+
+        else if node.type = "ul" then
+            yPosition = ulCallback(node, yPosition, parentNode)
+
+        else if node.type = "var" then
+            yPosition = varCallback(node, yPosition, parentNode)
+
+        else if node.type = "video" then
+            yPosition = videoCallback(node, yPosition, parentNode)
+
+        else if node.type = "wbr" then
+            yPosition = wbrCallback(node, yPosition, parentNode)
+
+        else if node.type = "xmp" then
+            yPosition = xmpCallback(node, yPosition, parentNode)
+
+        else
+            print "Skipping node of type: "; node.type
+        end if
+    end for
+
+    return yPosition  ' Return the total height of the content
+end function
+
+' Callback function for processing text nodes
+function textCallback(chunk as string, yPosition as Integer, parentNode as Object) as Integer
+    print "textCallback"
+
+    if Len(chunk) = 0 then
+        chunk = "No content available."
+    end if
+
+    ' Create a Label node for text content
+    labelNode = CreateObject("roSGNode", "Label")
+    labelNode.text = chunk
+    labelNode.translation = [50, yPosition]
+    labelNode.width = 1180  ' Adjusted width to fit within screen margins
+    labelNode.wrap = true
+    labelNode.font = { size: 24 }
+    labelNode.horizAlign = "left"
+
+    parentNode.appendChild(labelNode)
+
+    ' Estimate the height of the label
+    labelHeight = estimateLabelHeight(labelNode)
+    return yPosition + labelHeight + 10 ' Return updated yPosition with spacing
+end function
+
+function abbrCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    
+    print node.type ; "callback"
+
+    ' Check if the node has a title attribute for the abbreviation's full form
+    fullForm = node.attributes.Get("title", "")
+    
+    ' Create a Label node for the abbreviation
+    labelNode = CreateObject("roSGNode", "Label")
+    
+    ' Set the text to the abbreviation
+    labelNode.text = node.content
+
+    ' If a full form is available, display it in parentheses
+    if fullForm <> invalid and Len(fullForm) > 0 then
+        labelNode.text = labelNode.text + " (" + fullForm + ")"
+    end if
+
+    ' Set the position and other properties for the Label node
+    labelNode.translation = [50, yPosition]
+    labelNode.width = 1180  ' Adjusted width to fit within screen margins
+    labelNode.wrap = true
+    labelNode.font = { size: 24 }
+    labelNode.horizAlign = "left"
+
+    ' Append the Label node to the parent node
+    parentNode.appendChild(labelNode)
+
+    ' Estimate the height of the label and update yPosition
+    labelHeight = estimateLabelHeight(labelNode)
+    return yPosition + labelHeight + 10 ' Return updated yPosition with spacing
+end function
+
+
+function acronymCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Check if the node has a title attribute for the acronym's full form
+    fullForm = node.attributes.Get("title", "")
+    
+    ' Create a Label node for the acronym
+    labelNode = CreateObject("roSGNode", "Label")
+    
+    ' Set the text to the acronym
+    labelNode.text = node.content
+
+    ' If a full form is available, display it in parentheses
+    if fullForm <> invalid and Len(fullForm) > 0 then
+        labelNode.text = labelNode.text + " (" + fullForm + ")"
+    end if
+
+    ' Set the position and other properties for the Label node
+    labelNode.translation = [50, yPosition]
+    labelNode.width = 1180  ' Adjusted width to fit within screen margins
+    labelNode.wrap = true
+    labelNode.font = { size: 24 }
+    labelNode.horizAlign = "left"
+
+    ' Append the Label node to the parent node
+    parentNode.appendChild(labelNode)
+
+    ' Estimate the height of the label and update yPosition
+    labelHeight = estimateLabelHeight(labelNode)
+    return yPosition + labelHeight + 10 ' Return updated yPosition with spacing
+end function
+
+function addressCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a Label node for the address
+    labelNode = CreateObject("roSGNode", "Label")
+    
+    ' Set the text to the address content
+    labelNode.text = node.content
+
+    ' Set additional properties for the Label node
+    labelNode.translation = [50, yPosition]
+    labelNode.width = 1180  ' Adjusted width to fit within screen margins
+    labelNode.wrap = true
+    labelNode.font = { size: 20, bold: true }  ' Bold text for emphasis
+    labelNode.horizAlign = "left"
+    
+    ' Append the Label node to the parent node
+    parentNode.appendChild(labelNode)
+
+    ' Estimate the height of the label and update yPosition
+    labelHeight = estimateLabelHeight(labelNode)
+    return yPosition + labelHeight + 10  ' Return updated yPosition with spacing
+end function
+
+
+function appletCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a container for the applet
+    appletNode = CreateObject("roSGNode", "Group")
+
+    ' Set width and height attributes for the applet
+    width = node.attributes.get("width", "300")  ' Default width if not specified
+    height = node.attributes.get("height", "200")  ' Default height if not specified
+
+    ' Create a Label to indicate applet (for legacy content)
+    label = CreateObject("roSGNode", "Label")
+    label.text = "Applet (Deprecated) - " + node.attributes.get("code", "No Code Specified")
+    label.translation = [0, 0]  ' Positioning for the label
+    label.font = { size: 16, bold: true }  ' Emphasize deprecated notice
+    appletNode.appendChild(label)
+
+    ' Create a visual representation for the applet
+    visualNode = CreateObject("roSGNode", "Rectangle")
+    visualNode.width = width
+    visualNode.height = height
+    visualNode.color = "0xFFFFFF"  ' White background to represent applet area
+    appletNode.appendChild(visualNode)
+
+    ' If a code source is specified, you might want to embed it if possible
+    code = node.attributes.get("code", "")
+    if code <> "" then
+        ' Logic to embed the applet (if applicable, for demonstration)
+        ' This will depend on your project's handling of applets or alternative implementations
+        appletLabel = CreateObject("roSGNode", "Label")
+        appletLabel.text = "Code: " + code
+        appletLabel.translation = [10, 10]  ' Slight offset
+        appletNode.appendChild(appletLabel)
+    end if
+
+    ' Append the applet node to the parent node
+    parentNode.appendChild(appletNode)
+
+    ' Update yPosition based on the height of the applet
+    return yPosition + height + 10  ' Return updated yPosition with spacing
+end function
+
+
+function areaCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+
+    print node.type ; "callback"
+    ' Create a visual representation for the area
+    areaNode = CreateObject("roSGNode", "Rectangle")
+    
+    ' Retrieve attributes from the node
+    shape = node.attributes.get("shape", "rect")  ' Default shape is rectangle
+    coords = node.attributes.get("coords", "0,0,0,0")  ' Default coords if not specified
+    href = node.attributes.get("href", "")
+    altText = node.attributes.get("alt", "Area")
+
+    ' Clean and parse the coordinates manually
+    coordArray = []
+    tempCoords = ""
+    coordsLength = Len(coords)
+
+    for i = 1 to coordsLength
+        char = Mid(coords, i, 1)  ' Get the current character
+        if char <> " " then
+            if char = "," then
+                ' If it's a comma, push the collected value to coordArray
+                if tempCoords <> "" then
+                    coordArray.Push(Val(tempCoords))
+                    tempCoords = ""  ' Reset for the next value
+                end if
+            else
+                tempCoords = tempCoords + char  ' Append the character to tempCoords
+            end if
+        end if
+    end for
+    
+    ' Push the last value if any
+    if tempCoords <> "" then
+        coordArray.Push(Val(tempCoords))
+    end if
+
+    ' Check if the shape is rectangle and the number of coordinates is correct
+    if shape = "rect" and coordArray.GetSize() = 4 then
+        ' Rect shape: x1, y1, x2, y2
+        x1 = coordArray[0]
+        y1 = coordArray[1]
+        x2 = coordArray[2]
+        y2 = coordArray[3]
+        
+        ' Set dimensions based on coordinates
+        areaNode.translation = [x1, y1]
+        areaNode.width = x2 - x1
+        areaNode.height = y2 - y1
+        areaNode.color = "0xFF0000"  ' Red for visibility (clickable area)
+        
+        ' Set up a simple onClick handler for demonstration
+        areaNode.onKeyPress = function()
+            if href <> "" then
+                ' Navigate to the href when clicked
+                print "Navigating to: "; href
+                ' Additional logic to handle navigation could go here
+            else
+                print "No link specified for area."
+            end if
+        end function
+
+    else
+        ' Handle other shapes if necessary (circle, poly)
+        print "Unsupported shape or incorrect coordinates: "; shape, coords
+    end if
+
+    ' Append the area node to the parent node
+    parentNode.appendChild(areaNode)
+
+    ' Update yPosition (no height change for area, but could be adjusted based on context)
+    return yPosition
+end function
+
+
+function articleCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a Group node for the article
+    articleNode = CreateObject("roSGNode", "Group")
+
+    ' Retrieve optional attributes from the node
+    title = node.attributes.get("title", "")
+    lang = node.attributes.get("lang", "")
+
+    ' If the article has a title, create a Text node to display it
+    if title <> "" then
+        titleNode = CreateObject("roSGNode", "Label")
+        titleNode.text = title
+        titleNode.color = "0x000000"  ' Set text color to black
+        titleNode.font = "font:Medium"  ' Use a medium font for the title
+
+        ' Set the position of the title within the article
+        titleNode.translation = [0, yPosition]
+        articleNode.appendChild(titleNode)
+
+        ' Adjust yPosition after adding the title
+        yPosition = yPosition + 30  ' Increase yPosition based on title height
+    end if
+
+    ' Process child nodes within the article
+    contentNodes = node.nodes
+    for each contentNode in contentNodes
+        yPosition = renderHTMLTree(contentNode, articleNode, yPosition)  ' Call renderHTMLTree for child nodes
+    end for
+
+    ' Append the article node to the parent node
+    parentNode.appendChild(articleNode)
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function asideCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a Group node for the aside element
+    asideNode = CreateObject("roSGNode", "Group")
+
+    ' Set an optional style or class for the aside if necessary
+    asideNode.class = "aside"  ' Example class for styling
+
+    ' Process child nodes within the aside
+    contentNodes = node.nodes
+    for each contentNode in contentNodes
+        yPosition = renderHTMLTree(contentNode, asideNode, yPosition)  ' Call renderHTMLTree for child nodes
+    end for
+
+    ' Append the aside node to the parent node
+    parentNode.appendChild(asideNode)
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function audioCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create an Audio node
+    audioNode = CreateObject("roSGNode", "Audio")
+
+    ' Set attributes from the node
+    audioSrc = node.attributes["src"]
+    audioNode.url = audioSrc  ' Set the audio source
+
+    ' Set additional attributes if they exist
+    if node.attributes.hasKey("controls") then
+        audioNode.controls = true  ' Show controls if specified
+    end if
+
+    if node.attributes.hasKey("autoplay") then
+        audioNode.autoplay = true  ' Autoplay if specified
+    end if
+
+    if node.attributes.hasKey("loop") then
+        audioNode.loop = true  ' Loop if specified
+    end if
+
+    if node.attributes.hasKey("muted") then
+        audioNode.muted = true  ' Mute if specified
+    end if
+
+    ' Append the audio node to the parent node
+    parentNode.appendChild(audioNode)
+
+    ' Adjust the yPosition if necessary based on the height of the audio player
+    yPosition = yPosition + 50  ' Example height adjustment for the audio player
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function bCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a Label node for bold text
+    boldTextNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content of the bold node
+    boldTextNode.text = node.content  ' Get the content from the node
+
+    ' Set the font weight to bold using a style attribute
+    boldTextNode.font = "bold"  ' This sets the font weight; make sure it's supported
+
+    ' Append the bold text node to the parent node
+    parentNode.appendChild(boldTextNode)
+
+    ' Adjust the yPosition for the next element
+    yPosition = yPosition + 20  ' Example height adjustment for bold text
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function baseCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the href attribute from the node
+    baseUrl = node.attributes.href
+    
+    ' Check if the base URL is defined
+    if baseUrl <> invalid then
+        ' You can store this base URL in a global variable or configuration
+        ' For example, if you have a global attribute store:
+        globalAttributes = createAttributeTree()  ' Assuming you have this function
+        globalAttributes["baseUrl"] = baseUrl  ' Store the base URL
+    end if
+
+    ' Since <base> does not create any visible elements, we don't modify yPosition
+    return yPosition  ' Return the unchanged yPosition
+end function
+
+
+function basefontCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract attributes from the basefont node
+    fontSize = node.attributes.size
+    fontColor = node.attributes.color
+    fontFace = node.attributes.face
+    content = node.content  ' Get the content of the basefont node
+
+    ' Create a new label node with the specified font properties
+    labelNode = CreateObject("roSGNode", "Label")
+
+    ' Set the font properties if they are defined
+    if fontSize <> invalid then
+        labelNode.SetField("fontSize", fontSize)
+    end if
+    
+    if fontColor <> invalid then
+        labelNode.SetField("color", fontColor)
+    end if
+    
+    if fontFace <> invalid then
+        labelNode.SetField("fontFace", fontFace)
+    end if
+
+    ' Set the content of the label node
+    labelNode.SetField("text", content)
+
+    ' Append the label node to the parent node
+    parentNode.AddChild(labelNode)
+
+    ' Update yPosition based on the height of the new label node
+    yPosition = yPosition + labelNode.GetField("height")
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function bdiCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the bdi node
+    content = node.content
+
+    ' Create a new label node for the BDI text
+    bdiLabelNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text of the label node to the content of the bdi node
+    bdiLabelNode.SetField("text", content)
+
+    ' Optional: Set text direction if needed
+    ' Assuming you might have a "direction" attribute in the node
+    direction = node.attributes.direction
+    if direction <> invalid then
+        bdiLabelNode.SetField("textDirection", direction)
+    end if
+
+    ' Append the label node to the parent node
+    parentNode.AddChild(bdiLabelNode)
+
+    ' Update yPosition based on the height of the new label node
+    yPosition = yPosition + bdiLabelNode.GetField("height")
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function bdoCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the bdo node
+    content = node.content
+
+    ' Create a new label node for the BDO text
+    bdoLabelNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text of the label node to the content of the bdo node
+    bdoLabelNode.SetField("text", content)
+
+    ' Set the text direction based on the attributes of the bdo node
+    direction = node.attributes.direction
+    if direction <> invalid then
+        bdoLabelNode.SetField("textDirection", direction)
+    else
+        ' Default to left-to-right if no direction is specified
+        bdoLabelNode.SetField("textDirection", "ltr")
+    end if
+
+    ' Append the label node to the parent node
+    parentNode.AddChild(bdoLabelNode)
+
+    ' Update yPosition based on the height of the new label node
+    yPosition = yPosition + bdoLabelNode.GetField("height")
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function bgsoundCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the source of the audio file from the bgsound node
+    src = node.attributes.src
+    loop = node.attributes.loop
+    volume = node.attributes.volume
+
+    ' Create a new audio node for the background sound
+    audioNode = CreateObject("roSGNode", "Audio")
+
+    ' Set the source of the audio node
+    audioNode.SetField("uri", src)
+
+    ' Set looping if specified
+    if loop <> invalid and loop = "true" then
+        audioNode.SetField("loop", true)
+    else
+        audioNode.SetField("loop", false)
+    end if
+
+    ' Set volume if specified
+    if volume <> invalid then
+        audioNode.SetField("volume", volume)
+    end if
+
+    ' Append the audio node to the parent node
+    parentNode.AddChild(audioNode)
+
+    ' Start playing the audio
+    audioNode.Play()
+
+    ' Update yPosition based on the height of the audio node (if needed)
+    ' Assuming the audio node does not have a visible height contribution
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function bigCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the big node
+    textContent = node.content
+
+    ' Create a new label node with larger font size
+    textNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content
+    textNode.SetField("text", textContent)
+
+    ' Set the style to make the text larger
+    textNode.SetField("fontSize", "36px") ' Adjust size as needed
+
+    ' Append the text node to the parent node
+    parentNode.AddChild(textNode)
+
+    ' Update the yPosition based on the height of the text node
+    yPosition = yPosition + 40 ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+function blinkCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the blink node
+    textContent = node.content
+
+    ' Create a new label node
+    textNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content
+    textNode.SetField("text", textContent)
+
+    ' Set initial style (optional)
+    textNode.SetField("fontSize", "24px") ' Adjust size as needed
+    textNode.SetField("color", "white")    ' Change color if needed
+
+    ' Append the text node to the parent node
+    parentNode.AddChild(textNode)
+
+    ' Create a blink animation
+    animation = CreateObject("roSGNode", "Animation")
+
+    ' Set the animation properties
+    animation.SetField("duration", 500)  ' Duration of the blink in milliseconds
+    animation.SetField("repeatCount", 0)  ' Infinite repeat
+    animation.SetField("target", textNode) ' Target node to blink
+
+    ' Create the properties associative array
+    properties = CreateObject("roAssociativeArray")
+    properties["opacity"] = [0, 1]  ' Fade in and out
+
+    ' Set the properties in the animation
+    animation.SetField("properties", properties)
+
+    ' Add the animation to the parent node
+    parentNode.AddChild(animation)
+
+    ' Update the yPosition based on the height of the text node
+    yPosition = yPosition + 40 ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function blockquoteCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the blockquote node
+    textContent = node.content
+
+    ' Create a new Label node for the blockquote
+    labelNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content
+    labelNode.SetField("text", textContent)
+
+    ' Set style for the blockquote (indentation, font style, etc.)
+    labelNode.SetField("fontSize", "20px")  ' Adjust size as needed
+    labelNode.SetField("color", "gray")      ' Change text color if needed
+    labelNode.SetField("textAlign", "left")  ' Align text to the left
+    labelNode.SetField("paddingLeft", "20px")  ' Indent the blockquote
+
+    ' Append the Label node to the parent node
+    parentNode.AddChild(labelNode)
+
+    ' Update the yPosition based on the height of the label node
+    yPosition = yPosition + 50 ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function bodyCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node for the body content
+    bodyNode = CreateObject("roSGNode", "Group")
+
+    ' You might want to set some layout properties for the body
+    translation = CreateObject("roAssociativeArray")
+    translation["x"] = 0
+    translation["y"] = yPosition
+    bodyNode.SetField("translation", translation) ' Position the body according to yPosition
+
+    ' Append the body node to the parent node
+    parentNode.AddChild(bodyNode)
+
+    ' Iterate through child nodes of the body
+    for each childNode in node.children
+        yPosition = renderHTMLTree(childNode, bodyNode, yPosition) ' Render the child nodes
+    end for
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+function brCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Increment the yPosition to create a line break
+    yPosition = yPosition + 20 ' Adjust the increment as needed for spacing
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function buttonCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract properties from the button node
+    buttonText = node.content
+    buttonAttributes = node.attributes  ' Assuming you have the attributes in the node
+
+    ' Create a new Button node
+    buttonNode = CreateObject("roSGNode", "Button")
+
+    ' Set the button text
+    buttonNode.SetField("text", buttonText)
+
+    ' Set additional attributes if they exist
+    if buttonAttributes <> invalid
+        if buttonAttributes.hasKey("disabled")
+            buttonNode.SetField("disabled", true)
+        end if
+
+        if buttonAttributes.hasKey("type")
+            buttonNode.SetField("buttonType", buttonAttributes["type"])
+        end if
+
+        if buttonAttributes.hasKey("style")
+            buttonNode.SetField("color", buttonAttributes["style"]) ' Example for style, adjust as needed
+        end if
+    end if
+
+    ' Set the position of the button
+    buttonNode.SetField("translation", [0, yPosition]) ' Use brackets for arrays
+
+    ' Append the button node to the parent node
+    parentNode.AddChild(buttonNode)
+
+    ' Update the yPosition based on the height of the button
+    yPosition = yPosition + 50 ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+function canvasCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node to act as a canvas
+    canvasNode = CreateObject("roSGNode", "Group")
+
+    ' Extract properties from the canvas node
+    canvasWidth = node.attributes.width
+    canvasHeight = node.attributes.height
+    canvasBackgroundColor = node.attributes.backgroundColor ' Optional attribute
+
+    ' Set the canvas dimensions (width and height)
+    canvasNode.SetField("width", canvasWidth)
+    canvasNode.SetField("height", canvasHeight)
+
+    ' Set optional background color if provided
+    if canvasBackgroundColor <> invalid
+        canvasNode.SetField("color", canvasBackgroundColor)
+    end if
+
+    ' Set the position of the canvas
+    canvasNode.SetField("translation", [0, yPosition]) ' Position based on yPosition
+
+    ' Append the canvas node to the parent node
+    parentNode.AddChild(canvasNode)
+
+    ' Update the yPosition based on the height of the canvas
+    yPosition = yPosition + canvasHeight + 20 ' Adjust increment for spacing as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+function captionCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the caption text from the node
+    captionText = node.content
+
+    ' Create a new Text node for the caption
+    captionNode = CreateObject("roSGNode", "Label") ' Use "Text" or "Label" depending on your implementation
+
+    ' Set the text content of the caption
+    captionNode.SetField("text", captionText)
+
+    ' Set optional styles for the caption
+    captionNode.SetField("fontSize", "16px")  ' Adjust size as needed
+    captionNode.SetField("color", "black")     ' Set text color if needed
+    captionNode.SetField("textAlign", "center") ' Center align the text
+
+    ' Append the caption node to the parent node
+    parentNode.AddChild(captionNode)
+
+    ' Update the yPosition based on the height of the caption
+    yPosition = yPosition + 30 ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function centerCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node for centering content
+    centerNode = CreateObject("roSGNode", "Group")
+
+    ' Set optional properties for the center node
+    centerNode.SetField("horizontalAlignment", "center")
+
+    ' Append the center node to the parent node
+    parentNode.AddChild(centerNode)
+
+    ' Iterate through child nodes of the center node
+    for each childNode in node.children
+        yPosition = renderHTMLTree(childNode, centerNode, yPosition) ' Render the child nodes
+    end for
+
+    ' Update the yPosition based on the height of the centered content
+    yPosition = yPosition + 40 ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function citeCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the cite node
+    citeText = node.content
+
+    ' Create a new Label node for the citation
+    citeNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content
+    citeNode.SetField("text", citeText)
+
+    ' Set style for the citation (font size, color, etc.)
+    citeNode.SetField("fontSize", "18px")  ' Adjust size as needed
+    citeNode.SetField("color", "darkgray")  ' Change text color if needed
+    citeNode.SetField("fontStyle", "italic") ' Italic style for citations
+
+    ' Append the citation node to the parent node
+    parentNode.AddChild(citeNode)
+
+    ' Update the yPosition based on the height of the citation node
+    yPosition = yPosition + 30 ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+function codeCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the code node
+    codeText = node.content
+
+    ' Create a new Label node for the code
+    codeNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content
+    codeNode.SetField("text", codeText)
+
+    ' Set style for the code (font size, color, font family, etc.)
+    codeNode.SetField("fontSize", "16px")        ' Adjust size as needed
+    codeNode.SetField("color", "lightgreen")     ' Change text color if needed
+    codeNode.SetField("fontFamily", "Courier")   ' Monospace font for code
+
+    ' Append the code node to the parent node
+    parentNode.AddChild(codeNode)
+
+    ' Update the yPosition based on the height of the code node
+    yPosition = yPosition + 30 ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+function colCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract attributes from the col node
+    colAttributes = node.attributes  ' Assuming you have the attributes in the node
+
+    ' If parentNode is a table or colgroup, apply the column styles directly
+    if parentNode.GetType() = "colgroup" or parentNode.GetType() = "table"
+        ' Create a new Group node for styling purposes
+        colNode = CreateObject("roSGNode", "Group")
+
+        ' Set attributes for the column if they exist
+        if colAttributes <> invalid
+            if colAttributes.hasKey("span")
+                colNode.SetField("spanCount", colAttributes.span)
+            end if
+            
+            if colAttributes.hasKey("width")
+                colNode.SetField("width", colAttributes.width)
+            end if
+            
+            if colAttributes.hasKey("background")
+                colNode.SetField("backgroundColor", colAttributes.background)
+            end if
+        end if
+
+        ' Append the column node to the parent colgroup or table
+        parentNode.AddChild(colNode)
+    else
+        ' Handle cases where parent is not a colgroup or table
+        print "Warning: col node must be a child of a colgroup or table"
+    end if
+
+    ' Update the yPosition (not typically affected by <col>, so can stay the same)
+    return yPosition  ' Return the yPosition, unchanged
+end function
+
+
+
+function colgroupCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node for the colgroup
+    colGroupNode = CreateObject("roSGNode", "Group")
+
+    ' Extract attributes from the colgroup node
+    colgroupAttributes = node.attributes  ' Assuming you have the attributes in the node
+
+    ' Apply styles or attributes to the colgroup if they exist
+    if colgroupAttributes <> invalid
+        if colgroupAttributes.hasKey("width")
+            colGroupNode.SetField("width", colgroupAttributes.width)
+        end if
+
+        if colgroupAttributes.hasKey("background")
+            colGroupNode.SetField("backgroundColor", colgroupAttributes.background)
+        end if
+
+        if colgroupAttributes.hasKey("span")
+            colGroupNode.SetField("spanCount", colgroupAttributes.span)
+        end if
+    end if
+
+    ' Append the colgroup node to the parent node (usually a table)
+    parentNode.AddChild(colGroupNode)
+
+    ' Iterate through child nodes of the colgroup
+    for each childNode in node.children
+        yPosition = renderHTMLTree(childNode, colGroupNode, yPosition) ' Render the child nodes
+    end for
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+function dataCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the value from the data node
+    dataValue = node.value  ' Assuming you have the value in the node
+    dataContent = node.content  ' Get the text content if needed
+
+    ' Create a new Label node to display the data value
+    dataNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content (display the data value)
+    if dataValue <> invalid
+        dataNode.SetField("text", dataValue)
+    else
+        dataNode.SetField("text", dataContent)  ' Fallback to content if value is not available
+    end if
+
+    ' Set additional styling (optional)
+    dataNode.SetField("fontSize", "18px")  ' Adjust size as needed
+    dataNode.SetField("color", "blue")      ' Example color
+
+    ' Append the data node to the parent node
+    parentNode.AddChild(dataNode)
+
+    ' Update the yPosition based on the height of the label node
+    yPosition = yPosition + 30 ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+function datalistCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node for the datalist
+    datalistNode = CreateObject("roSGNode", "Group")
+
+    ' Append the datalist node to the parent node
+    parentNode.AddChild(datalistNode)
+
+    ' Iterate through the options in the datalist
+    for each option in node.options
+        ' Create a new Label node for each option
+        optionNode = CreateObject("roSGNode", "Label")
+
+        ' Set the text content of the option
+        optionNode.SetField("text", option.label)
+
+        ' Set additional styling if needed
+        optionNode.SetField("fontSize", "16px")  ' Adjust size as needed
+        optionNode.SetField("color", "black")     ' Example color
+
+        ' Append the option node to the datalist node
+        datalistNode.AddChild(optionNode)
+
+        ' Update the yPosition based on the height of the option node
+        yPosition = yPosition + 30 ' Adjust height increment as needed
+    end for
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function ddCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the dd node
+    ddContent = node.content
+
+    ' Create a new Label node for the description
+    ddNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content of the dd node
+    ddNode.SetField("text", ddContent)
+
+    ' Set additional styling for the description
+    ddNode.SetField("fontSize", "16px")  ' Adjust size as needed
+    ddNode.SetField("color", "black")     ' Example color
+    ddNode.SetField("paddingLeft", "20px")  ' Indent the dd content
+
+    ' Append the dd node to the parent node
+    parentNode.AddChild(ddNode)
+
+    ' Update the yPosition based on the height of the dd node
+    yPosition = yPosition + 30 ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function delCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the del node
+    delContent = node.content
+
+    ' Create a new Label node for the deleted text
+    delNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content of the del node
+    delNode.SetField("text", delContent)
+
+    ' Set additional styling for the deleted text
+    delNode.SetField("fontSize", "16px")          ' Adjust size as needed
+    delNode.SetField("color", "red")              ' Example color to indicate deletion
+    delNode.SetField("textDecoration", "line-through") ' Strikethrough effect
+
+    ' Append the del node to the parent node
+    parentNode.AddChild(delNode)
+
+    ' Update the yPosition based on the height of the del node
+    yPosition = yPosition + 30 ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+function detailsCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the summary and details content from the node
+    summaryContent = node.summary  ' Assuming you have the summary in the node
+    detailsContent = node.children   ' Assuming child nodes are the detailed content
+
+    ' Create a new Group node for the details section
+    detailsNode = CreateObject("roSGNode", "Group")
+
+    ' Create a new Label for the summary
+    summaryNode = CreateObject("roSGNode", "Label")
+    summaryNode.SetField("text", summaryContent)
+    summaryNode.SetField("fontSize", "20px")  ' Adjust size as needed
+    summaryNode.SetField("color", "blue")      ' Example color for summary
+    summaryNode.SetField("textDecoration", "underline") ' Underline summary
+
+    ' Append the summary label to the details group
+    detailsNode.AddChild(summaryNode)
+
+    ' Create a Group for the details content, initially hidden
+    detailsContentNode = CreateObject("roSGNode", "Group")
+    detailsContentNode.SetField("visible", false)  ' Hide by default
+
+    ' Render each child node in the details section
+    for each child in detailsContent
+        yPosition = renderHTMLTree(child, detailsContentNode, yPosition)
+    end for
+
+    ' Append the details content group to the details node
+    detailsNode.AddChild(detailsContentNode)
+
+    ' Set up an event listener on the summary node to toggle visibility of details content
+    summaryNode.SetField("onKeyDown", "toggleDetails")
+    summaryNode.SetField("detailsNode", detailsContentNode) ' Pass the detailsNode for visibility toggle
+
+    ' Append the details node to the parent node
+    parentNode.AddChild(detailsNode)
+
+    ' Update the yPosition based on the height of the summary node
+    yPosition = yPosition + 50 ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+function toggleDetails(summaryNode as Object, event as Object)
+    print node.type ; "callback"
+    ' Get the details node from the summary node's field
+    detailsNode = summaryNode.GetField("detailsNode")
+
+    ' Toggle visibility of the details node
+    isVisible = detailsNode.GetField("visible")
+    detailsNode.SetField("visible", not isVisible)
+end function
+
+
+function dfnCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the definition content from the node
+    definitionContent = node.content  ' Assuming you have the definition text in the node
+
+    ' Create a new Label node for the definition term
+    dfnNode = CreateObject("roSGNode", "Label")
+
+    ' Set the definition content
+    dfnNode.SetField("text", definitionContent)
+
+    ' Set styling for the definition term
+    dfnNode.SetField("fontSize", "18px")  ' Adjust size as needed
+    dfnNode.SetField("color", "green")     ' Example color for emphasis
+    dfnNode.SetField("fontWeight", "bold")  ' Make it bold
+
+    ' Append the definition node to the parent node
+    parentNode.AddChild(dfnNode)
+
+    ' Update the yPosition based on the height of the definition node
+    yPosition = yPosition + 30 ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+function dialogCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the content from the dialog node
+    dialogContent = node.content  ' Assuming you have the dialog content in the node
+
+    ' Create a new Dialog node
+    dialogNode = CreateObject("roSGNode", "Dialog")
+
+    ' Set the dialog properties
+    dialogNode.SetField("title", "Dialog Title")  ' You can set a dynamic title if needed
+    dialogNode.SetField("content", dialogContent)  ' Set the dialog content
+
+    ' Optionally, set additional properties for the dialog
+    dialogNode.SetField("backgroundColor", "rgba(0, 0, 0, 0.5)")  ' Semi-transparent background
+    dialogNode.SetField("padding", "20px")  ' Padding inside the dialog
+
+    ' Append the dialog node to the parent node
+    parentNode.AddChild(dialogNode)
+
+    ' Update the yPosition based on the height of the dialog node
+    yPosition = yPosition + 100 ' Adjust height increment as needed for the dialog
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function dirCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node for the directory list
+    dirNode = CreateObject("roSGNode", "Group")
+
+    ' Set the position of the directory node using SetField with individual components
+    dirNode.SetField("translation.x", 0)
+    dirNode.SetField("translation.y", yPosition)
+
+    ' Iterate through child nodes of the dir
+    for each listItem in node.children
+        ' Create a new Poster node for each item in the directory
+        itemNode = CreateObject("roSGNode", "Poster")
+
+        ' Set the text content for the item
+        itemNode.SetField("url", "path/to/image.png")  ' Placeholder for item visuals, replace with your image URL or logic
+        itemNode.SetField("title", listItem.content)    ' Assuming content holds the text for each item
+
+        ' Set additional styling if desired
+        itemNode.SetField("width", "100%")              ' Adjust size as needed
+        itemNode.SetField("height", "30px")             ' Example height
+
+        ' Append the item node to the directory node
+        dirNode.AddChild(itemNode)
+
+        ' Update the yPosition based on the height of the item node
+        yPosition = yPosition + 30 ' Adjust height increment as needed
+    end for
+
+    ' Append the directory node to the parent node
+    parentNode.AddChild(dirNode)
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+function divCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node for the div content
+    divNode = CreateObject("roSGNode", "Group")
+
+    ' Set the position of the div node
+    divNode.SetField("translation.x", 0)
+    divNode.SetField("translation.y", yPosition)
+
+    ' Iterate through child nodes of the div
+    for each childNode in node.children
+        yPosition = renderHTMLTree(childNode, divNode, yPosition)  ' Render the child nodes
+    end for
+
+    ' Append the div node to the parent node
+    parentNode.AddChild(divNode)
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+function dlCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node for the description list
+    dlNode = CreateObject("roSGNode", "Group")
+
+    ' Iterate through child nodes of the dl
+    for each childNode in node.children
+        if childNode.type = "dt" then
+            ' Handle definition term
+            termNode = CreateObject("roSGNode", "Label")  ' Use Label instead of Text
+            termNode.SetField("text", childNode.content)  ' Get the term content
+            termNode.SetField("fontSize", "18px")  ' Adjust size as needed
+            termNode.SetField("fontWeight", "bold")  ' Make the term bold
+            dlNode.AddChild(termNode)
+
+            ' Update yPosition after adding the term
+            yPosition = yPosition + 25  ' Adjust height increment as needed
+
+        else if childNode.type = "dd" then
+            ' Handle definition description
+            descNode = CreateObject("roSGNode", "Label")  ' Use Label instead of Text
+            descNode.SetField("text", childNode.content)  ' Get the description content
+            descNode.SetField("fontSize", "16px")  ' Adjust size as needed
+            descNode.SetField("color", "gray")  ' Example color
+            dlNode.AddChild(descNode)
+
+            ' Update yPosition after adding the description
+            yPosition = yPosition + 20  ' Adjust height increment as needed
+        end if
+    end for
+
+    ' Set the position of the description list node after all children are added
+    lastItemHeight = 25 + 20  ' Adjust based on the last item's height
+    dlNode.SetField("translation", [0, yPosition - lastItemHeight])  ' Corrected to use brackets
+
+    ' Append the description list node to the parent node
+    parentNode.AddChild(dlNode)
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+function dtCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Label node for the definition term
+    termNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content for the term
+    termNode.SetField("text", node.content)  ' Assuming the content holds the text for the term
+
+    ' Set additional styling for the term
+    termNode.SetField("fontSize", "18px")  ' Adjust size as needed
+    termNode.SetField("fontWeight", "bold")  ' Make the term bold
+
+    ' Append the term node to the parent node
+    parentNode.AddChild(termNode)
+
+    ' Update the yPosition based on the height of the term node
+    yPosition = yPosition + 25  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function emCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the em node
+    emText = node.content
+
+    ' Create a new Label node for the emphasized text
+    emNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content
+    emNode.SetField("text", emText)
+
+    ' Set additional styling for emphasis
+    emNode.SetField("fontSize", "18px")  ' Adjust size as needed
+    emNode.SetField("fontStyle", "italic")  ' Make the text italicized
+    emNode.SetField("color", "black")     ' Example color
+
+    ' Append the em node to the parent node
+    parentNode.AddChild(emNode)
+
+    ' Update the yPosition based on the height of the text node
+    yPosition = yPosition + 30  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+function embedCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract attributes from the embed node
+    embedSrc = node.attributes.src  ' Assuming you have the src attribute in the node
+    embedType = node.attributes.type  ' Assuming you have the type attribute in the node
+    embedWidth = node.attributes.width  ' Assuming you have the width attribute in the node
+    embedHeight = node.attributes.height  ' Assuming you have the height attribute in the node
+
+    ' Create a new Video node or any appropriate node for the embed content
+    embedNode = CreateObject("roSGNode", "Video")  ' Change to appropriate node type if needed
+
+    ' Set the source and dimensions for the embed node
+    embedNode.SetField("uri", embedSrc)
+    embedNode.SetField("width", embedWidth)
+    embedNode.SetField("height", embedHeight)
+    embedNode.SetField("type", embedType)
+
+    ' Append the embed node to the parent node
+    parentNode.AddChild(embedNode)
+
+    ' Update the yPosition based on the height of the embed node
+    yPosition = yPosition + embedHeight + 20  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function fieldsetCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node for the fieldset
+    fieldsetNode = CreateObject("roSGNode", "Group")
+
+    ' Set styling for the fieldset (optional)
+    fieldsetNode.SetField("backgroundColor", "lightgray")  ' Example background color
+    fieldsetNode.SetField("padding", "10px")  ' Example padding
+
+    ' Append the fieldset node to the parent node
+    parentNode.AddChild(fieldsetNode)
+
+    ' Add a legend if it exists
+    if node.attributes.hasKey("legend")
+        legendNode = CreateObject("roSGNode", "Label")  ' Create a label for the legend
+        legendNode.SetField("text", node.attributes.legend)  ' Set the text of the legend
+        legendNode.SetField("fontSize", "16px")  ' Adjust size as needed
+        legendNode.SetField("fontWeight", "bold")  ' Make it bold
+        fieldsetNode.AddChild(legendNode)  ' Append the legend to the fieldset node
+        yPosition = yPosition + 30  ' Adjust yPosition for the legend height
+    end if
+
+    ' Iterate through child nodes of the fieldset
+    for each childNode in node.children
+        yPosition = renderHTMLTree(childNode, fieldsetNode, yPosition)  ' Render child nodes
+    end for
+
+    ' Update the yPosition based on the height of the fieldset
+    yPosition = yPosition + 20  ' Add some space after the fieldset
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function figcaptionCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the figcaption node
+    captionText = node.content
+
+    ' Create a new Label node for the figcaption
+    captionNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content for the figcaption
+    captionNode.SetField("text", captionText)
+
+    ' Set additional styling for the caption
+    captionNode.SetField("fontSize", "14px")  ' Adjust size as needed
+    captionNode.SetField("color", "darkgray")  ' Example color
+    captionNode.SetField("textAlign", "center")  ' Center align the text
+
+    ' Append the caption node to the parent node
+    parentNode.AddChild(captionNode)
+
+    ' Update the yPosition based on the height of the caption
+    yPosition = yPosition + 25  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function figureCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node for the figure
+    figureNode = CreateObject("roSGNode", "Group")
+
+    ' Set the position of the figure node
+    figureNode.SetField("translation", [0, yPosition])
+
+    ' Iterate through child nodes of the figure
+    for each childNode in node.children
+        if childNode.type = "img" then
+            ' Handle image element
+            imgNode = CreateObject("roSGNode", "Poster")  ' Use Poster for displaying images
+            imgNode.SetField("uri", childNode.src)  ' Assuming the src holds the image URL
+            figureNode.AddChild(imgNode)
+
+            ' Update yPosition based on the height of the image
+            yPosition = yPosition + 200  ' Adjust height increment as needed
+
+        else if childNode.type = "figcaption" then
+            ' Handle figcaption element
+            yPosition = figcaptionCallback(childNode, yPosition, figureNode)
+        end if
+    end for
+
+    ' Append the figure node to the parent node
+    parentNode.AddChild(figureNode)
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+function fontCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the font node
+    textContent = node.content
+
+    ' Create a new Label node for the font
+    fontNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content
+    fontNode.SetField("text", textContent)
+
+    ' Extract and set font attributes if they exist
+    if node.attributes <> invalid
+        if node.attributes.hasKey("size")
+            fontNode.SetField("fontSize", node.attributes.size)
+        end if
+
+        if node.attributes.hasKey("color")
+            fontNode.SetField("color", node.attributes.color)
+        end if
+
+        if node.attributes.hasKey("face")
+            fontNode.SetField("fontFamily", node.attributes.face)
+        end if
+    end if
+
+    ' Append the font node to the parent node
+    parentNode.AddChild(fontNode)
+
+    ' Update the yPosition based on the height of the label node
+    yPosition = yPosition + 30 ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function footerCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node for the footer
+    footerNode = CreateObject("roSGNode", "Group")
+
+    ' Set the position of the footer node
+    footerNode.SetField("translation", [0, yPosition])
+
+    ' Iterate through child nodes of the footer
+    for each childNode in node.children
+        if childNode.type = "text" then
+            ' Create a Label node for text content
+            textNode = CreateObject("roSGNode", "Label")
+            textNode.SetField("text", childNode.content)
+            textNode.SetField("fontSize", "14px")  ' Adjust size as needed
+            textNode.SetField("color", "gray")      ' Example color
+
+            ' Append the text node to the footer
+            footerNode.AddChild(textNode)
+
+            ' Update yPosition based on the height of the text node
+            yPosition = yPosition + 20  ' Adjust height increment as needed
+
+        else if childNode.type = "link" then
+            ' Create a Link node for hyperlinks if necessary
+            linkNode = CreateObject("roSGNode", "Label") ' Using Label for links
+            linkNode.SetField("text", childNode.content)
+            linkNode.SetField("color", "blue")  ' Example link color
+            linkNode.SetField("fontSize", "14px")  ' Adjust size as needed
+
+            ' Append the link node to the footer
+            footerNode.AddChild(linkNode)
+
+            ' Update yPosition for the link
+            yPosition = yPosition + 20  ' Adjust height increment as needed
+        end if
+    end for
+
+    ' Append the footer node to the parent node
+    parentNode.AddChild(footerNode)
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+function formCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node for the form
+    formNode = CreateObject("roSGNode", "Group")
+
+    ' Set the position of the form node
+    formNode.SetField("translation", [0, yPosition])
+
+    ' Iterate through child nodes of the form
+    for each childNode in node.children
+        if childNode.type = "input" then
+            ' Create a Label node to represent the input
+            inputNode = CreateObject("roSGNode", "Label")
+            inputNode.SetField("text", childNode.attributes.placeholder)  ' Set placeholder text
+            inputNode.SetField("fontSize", "18px")  ' Adjust size as needed
+            inputNode.SetField("color", "black")     ' Set color
+
+            ' Append the input node to the form
+            formNode.AddChild(inputNode)
+
+            ' Update yPosition for the next input
+            yPosition = yPosition + 40  ' Adjust height increment as needed
+
+        else if childNode.type = "button" then
+            ' Create a Button node
+            buttonNode = CreateObject("roSGNode", "Button")
+            buttonNode.SetField("text", childNode.content)  ' Set button text
+            buttonNode.SetField("buttonType", childNode.attributes.type)  ' Set button type (submit, reset, etc.)
+
+            ' Append the button node to the form
+            formNode.AddChild(buttonNode)
+
+            ' Update yPosition for the button
+            yPosition = yPosition + 50  ' Adjust height increment as needed
+        end if
+    end for
+
+    ' Append the form node to the parent node
+    parentNode.AddChild(formNode)
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+function frameCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node to represent the frame
+    frameNode = CreateObject("roSGNode", "Group")
+
+    ' Set the position of the frame node
+    frameNode.SetField("translation", [0, yPosition])
+
+    ' Check if the node has a source attribute (like src in a frame)
+    if node.attributes.hasKey("src")
+        frameContent = node.attributes.src  ' Get the content source
+
+        ' Create a Label or another node to simulate the frame content
+        contentNode = CreateObject("roSGNode", "Label")
+        contentNode.SetField("text", "Content from: " + frameContent)  ' Display the source URL
+        contentNode.SetField("fontSize", "16px")
+        contentNode.SetField("color", "black")
+
+        ' Append the content node to the frame
+        frameNode.AddChild(contentNode)
+    end if
+
+    ' Append the frame node to the parent node
+    parentNode.AddChild(frameNode)
+
+    ' Update yPosition after adding the frame
+    yPosition = yPosition + 100  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function framesetCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node to represent the frameset
+    framesetNode = CreateObject("roSGNode", "Group")
+
+    ' Set the position of the frameset node
+    framesetNode.SetField("translation", [0, yPosition])
+
+    ' Iterate through child nodes of the frameset
+    for each childNode in node.children
+        if childNode.type = "frame" then
+            ' Handle individual frame nodes
+            yPosition = frameCallback(childNode, yPosition, framesetNode)
+        end if
+    end for
+
+    ' Append the frameset node to the parent node
+    parentNode.AddChild(framesetNode)
+
+    ' Update yPosition after adding the frameset
+    yPosition = yPosition + 50 ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function headerCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the header content from the node
+    headerContent = node.content
+
+    ' Create a new Label node for the header
+    headerNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content for the header
+    headerNode.SetField("text", headerContent)
+
+    ' Set styling based on header level (h1, h2, etc.)
+    if node.type = "h1"
+        headerNode.SetField("fontSize", "32px")  ' Example for h1
+        headerNode.SetField("fontWeight", "bold")
+    else if node.type = "h2"
+        headerNode.SetField("fontSize", "28px")  ' Example for h2
+        headerNode.SetField("fontWeight", "bold")
+    else if node.type = "h3"
+        headerNode.SetField("fontSize", "24px")  ' Example for h3
+    else if node.type = "h4"
+        headerNode.SetField("fontSize", "20px")  ' Example for h4
+    else if node.type = "h5"
+        headerNode.SetField("fontSize", "18px")  ' Example for h5
+    else if node.type = "h6"
+        headerNode.SetField("fontSize", "16px")  ' Example for h6
+    end if
+
+    ' Set additional styling (optional)
+    headerNode.SetField("color", "black")  ' Example color
+    headerNode.SetField("padding", "10px")  ' Example padding
+
+    ' Append the header node to the parent node
+    parentNode.AddChild(headerNode)
+
+    ' Update the yPosition based on the height of the header node
+    yPosition = yPosition + 50  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+function headCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Print the head node content for debugging
+    print "headCallback"
+
+    ' Iterate through the child nodes of the head
+    for each childNode in node.children
+        if childNode.type = "title" then
+            ' Handle title element
+            titleContent = childNode.content
+            print "Title: "; titleContent  ' Print or process the title content
+
+        else if childNode.type = "meta" then
+            ' Handle meta elements
+            metaAttributes = childNode.attributes
+            if metaAttributes <> invalid and metaAttributes.hasKey("name") then
+                print "Meta Tag: "; metaAttributes.name; " Content: "; metaAttributes.content
+            end if
+
+        else if childNode.type = "link" then
+            ' Handle link elements for stylesheets
+            linkAttributes = childNode.attributes
+            if linkAttributes <> invalid and linkAttributes.hasKey("href") then
+                print "Stylesheet Link: "; linkAttributes.href
+            end if
+
+        else if childNode.type = "script" then
+            ' Handle script elements
+            scriptAttributes = childNode.attributes
+            if scriptAttributes <> invalid and scriptAttributes.hasKey("src") then
+                print "Script Source: "; scriptAttributes.src
+            end if
+        end if
+    end for
+
+    return yPosition  ' Return the yPosition unchanged, as <head> doesn't affect layout
+end function
+
+
+function hrCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new line node
+    hrNode = CreateObject("roSGNode", "Rectangle")  ' Using a rectangle to represent the line
+
+    ' Set the properties of the line
+    hrNode.SetField("width", "100%")        ' Full width
+    hrNode.SetField("height", "2px")        ' Height of the line
+    hrNode.SetField("color", "gray")        ' Color of the line
+    hrNode.SetField("translation", [0, yPosition])  ' Position it based on yPosition
+
+    ' Append the horizontal rule node to the parent node
+    parentNode.AddChild(hrNode)
+
+    ' Update the yPosition based on the height of the line
+    yPosition = yPosition + 10  ' Adjust height increment as needed for spacing
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+function htmlCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node for the HTML content
+    htmlNode = CreateObject("roSGNode", "Group")
+
+    ' Set the position of the HTML node
+    htmlNode.SetField("translation", [0, yPosition])
+
+    ' Append the HTML node to the parent node
+    parentNode.AddChild(htmlNode)
+
+    ' Iterate through child nodes of the HTML
+    for each childNode in node.children
+        yPosition = renderHTMLTree(childNode, htmlNode, yPosition) ' Render the child nodes within the htmlNode
+    end for
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function iCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the <i> node
+    italicText = node.content
+
+    ' Create a new Label node for the italic text
+    italicNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content
+    italicNode.SetField("text", italicText)
+
+    ' Set style to italicize the text
+    italicNode.SetField("fontStyle", "italic")  ' Set font style to italic
+
+    ' Append the italic node to the parent node
+    parentNode.AddChild(italicNode)
+
+    ' Update the yPosition based on the height of the italic node
+    yPosition = yPosition + 30  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function iframeCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the source URL from the iframe node
+    iframeSrc = node.attributes.url  ' Assuming the source URL is stored in the attributes
+
+    ' Create a new Label node to represent the iframe
+    iframeNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content to indicate an iframe (you can customize this)
+    iframeNode.SetField("text", "Iframe: " + iframeSrc)
+
+    ' Set additional styling if desired
+    iframeNode.SetField("fontSize", "16px")  ' Adjust size as needed
+    iframeNode.SetField("color", "blue")      ' Example color for the iframe indication
+
+    ' Append the iframe node to the parent node
+    parentNode.AddChild(iframeNode)
+
+    ' Update the yPosition based on the height of the iframe node
+    yPosition = yPosition + 50  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+function imageCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the source URL from the image node
+    imageSrc = node.attributes.src  ' Assuming the source URL is stored in the attributes
+
+    ' Create a new Group node to contain the image representation
+    imageNode = CreateObject("roSGNode", "Group")
+
+    ' Create a Label to represent the image (since Image is not a valid roSGNode)
+    imgLabel = CreateObject("roSGNode", "Label")
+
+    ' Set the text content to indicate an image (customize as needed)
+    imgLabel.SetField("text", "Image: " + imageSrc)
+
+    ' Set additional properties (example: font size, color)
+    imgLabel.SetField("fontSize", "16px")  ' Adjust size as needed
+    imgLabel.SetField("color", "black")     ' Set text color
+
+    ' Add the image representation Label to the image node
+    imageNode.AddChild(imgLabel)
+
+    ' Append the image node to the parent node
+    parentNode.AddChild(imageNode)
+
+    ' Update the yPosition based on the height of the image node
+    yPosition = yPosition + 40  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+function insCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the inserted node
+    textContent = node.content
+
+    ' Create a new Label node to display the inserted text
+    insNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content
+    insNode.SetField("text", textContent)
+
+    ' Set additional styling for inserted text
+    insNode.SetField("fontSize", "16px")  ' Adjust size as needed
+    insNode.SetField("color", "green")     ' Use green to indicate insertion (example color)
+    insNode.SetField("fontStyle", "italic") ' Italicize the text
+
+    ' Set the position of the inserted text node
+    insNode.SetField("translation", [0, yPosition])
+
+    ' Append the inserted text node to the parent node
+    parentNode.AddChild(insNode)
+
+    ' Update the yPosition based on the height of the inserted text
+    yPosition = yPosition + 30  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+function inputCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract attributes from the input node
+    inputAttributes = node.attributes  ' Assuming you have the attributes in the node
+
+    if inputAttributes.type = "text" or inputAttributes.type = invalid
+        ' Instead of creating a TextField, use a Label to display placeholder
+        textLabel = CreateObject("roSGNode", "Label")
+        if inputAttributes.hasKey("placeholder")
+            textLabel.SetField("text", inputAttributes.placeholder)  ' Set placeholder text
+        else
+            textLabel.SetField("text", "")  ' Default to empty if no placeholder
+        end if
+
+        ' Set the position of the label
+        textLabel.SetField("translation", [0, yPosition])
+        parentNode.AddChild(textLabel)
+
+        ' Update the yPosition based on the height of the label
+        yPosition = yPosition + 40  ' Adjust height increment as needed
+
+    else if inputAttributes.type = "checkbox"
+        ' Create a new Label node for the checkbox
+        checkboxLabel = CreateObject("roSGNode", "Label")
+        checkboxLabel.SetField("text", inputAttributes.label)  ' Set the label text
+        checkboxLabel.SetField("translation", [0, yPosition])
+        parentNode.AddChild(checkboxLabel)
+
+        ' Create a checkbox using a Button or a custom node
+        checkboxButton = CreateObject("roSGNode", "Button")
+        checkboxButton.SetField("text", "[ ]")  ' Placeholder for the checkbox
+        checkboxButton.SetField("translation", [20, yPosition])  ' Slightly offset from the label
+        parentNode.AddChild(checkboxButton)
+
+        ' Update the yPosition based on the height of the checkbox
+        yPosition = yPosition + 40  ' Adjust height increment as needed
+
+    else if inputAttributes.type = "button"
+        ' Create a new Button node for button inputs
+        button = CreateObject("roSGNode", "Button")
+        button.SetField("text", inputAttributes.label)  ' Set button label
+        button.SetField("translation", [0, yPosition])
+        parentNode.AddChild(button)
+
+        ' Update the yPosition based on the height of the button
+        yPosition = yPosition + 40  ' Adjust height increment as needed
+    end if
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function isindexCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node to contain the isindex elements
+    isindexNode = CreateObject("roSGNode", "Group")
+
+    ' Create a Label to prompt the user
+    promptNode = CreateObject("roSGNode", "Label")
+    promptNode.SetField("text", "Search:")  ' Prompt text
+    promptNode.SetField("fontSize", "16px")  ' Adjust size as needed
+    promptNode.SetField("color", "black")    ' Example color
+
+    ' Append the prompt node to the isindex node
+    isindexNode.AddChild(promptNode)
+
+    ' Create a Label node to simulate the input field
+    inputNode = CreateObject("roSGNode", "Label")
+    inputNode.SetField("text", "__________________")  ' Placeholder for input appearance
+    inputNode.SetField("fontSize", "16px")
+    inputNode.SetField("color", "gray")
+
+    ' Set the position of the input node
+    inputNode.SetField("translation", [0, yPosition])  ' Set position based on yPosition
+
+    ' Append the input node to the isindex node
+    isindexNode.AddChild(inputNode)
+
+    ' Create a Button for submission
+    buttonNode = CreateObject("roSGNode", "Button")
+    buttonNode.SetField("text", "Submit")  ' Button text
+    buttonNode.SetField("fontSize", "16px")
+
+    ' Set the position of the button node below the input node
+    buttonNode.SetField("translation", [0, yPosition + 30])  ' Position below the input
+
+    ' Append the button node to the isindex node
+    isindexNode.AddChild(buttonNode)
+
+    ' Append the isindex node to the parent node
+    parentNode.AddChild(isindexNode)
+
+    ' Update the yPosition based on the height of the input field and prompt
+    yPosition = yPosition + 70  ' Adjust height increment as needed (prompt + input + button)
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+function kbdCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node for keyboard input representation
+    kbdNode = CreateObject("roSGNode", "Group")
+
+    ' Set the position of the keyboard node
+    kbdNode.SetField("translation", [0, yPosition])
+
+    ' Iterate through child nodes to represent keys
+    for each keyNode in node.children
+        keyLabel = CreateObject("roSGNode", "Label")
+        
+        ' Set the text content of the key
+        keyLabel.SetField("text", keyNode.content)  ' Assuming content has the key representation
+        keyLabel.SetField("fontSize", "16px")  ' Adjust size as needed
+        keyLabel.SetField("padding", "5px")     ' Add padding for appearance
+        kbdNode.AddChild(keyLabel)
+
+        ' Update yPosition based on the height of the key label
+        yPosition = yPosition + 25  ' Adjust height increment as needed
+    end for
+
+    ' Append the keyboard node to the parent node
+    parentNode.AddChild(kbdNode)
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function keygenCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node for the keygen representation
+    keygenNode = CreateObject("roSGNode", "Group")
+
+    ' Set the position of the keygen node
+    keygenNode.SetField("translation", [0, yPosition])
+
+    ' Create a label to indicate the key generation
+    labelNode = CreateObject("roSGNode", "Label")
+    labelNode.SetField("text", "Generate Key Pair")  ' Displaying a prompt
+    labelNode.SetField("fontSize", "18px")  ' Adjust size as needed
+    labelNode.SetField("padding", "5px")     ' Add padding for appearance
+    keygenNode.AddChild(labelNode)
+
+    ' Create a button for key generation
+    generateButton = CreateObject("roSGNode", "Button")
+    generateButton.SetField("text", "Generate")  ' Button label
+    generateButton.SetField("translation", [0, 25])  ' Position below the label
+    generateButton.SetField("action", "keygen")  ' Placeholder for action (can be handled separately)
+    keygenNode.AddChild(generateButton)
+
+    ' Append the keygen node to the parent node
+    parentNode.AddChild(keygenNode)
+
+    ' Update yPosition based on the height of the keygen node
+    yPosition = yPosition + 75  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function labelCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the label node
+    labelText = node.content  ' Assuming the content holds the text for the label
+
+    ' Create a new Label node
+    labelNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content for the label
+    labelNode.SetField("text", labelText)
+
+    ' Set additional styling if desired
+    labelNode.SetField("fontSize", "16px")  ' Adjust size as needed
+    labelNode.SetField("color", "black")     ' Example color
+
+    ' Set the position of the label
+    labelNode.SetField("translation", [0, yPosition])
+
+    ' Append the label node to the parent node
+    parentNode.AddChild(labelNode)
+
+    ' Update the yPosition based on the height of the label node
+    yPosition = yPosition + 30  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function legendCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the legend node
+    legendText = node.content  ' Assuming the content holds the text for the legend
+
+    ' Create a new Label node for the legend
+    legendNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content for the legend
+    legendNode.SetField("text", legendText)
+
+    ' Set additional styling if desired
+    legendNode.SetField("fontSize", "16px")  ' Adjust size as needed
+    legendNode.SetField("color", "black")     ' Example color
+    legendNode.SetField("fontWeight", "bold")  ' Make the legend bold
+
+    ' Set the position of the legend
+    legendNode.SetField("translation", [0, yPosition])
+
+    ' Append the legend node to the parent node
+    parentNode.AddChild(legendNode)
+
+    ' Update the yPosition based on the height of the legend node
+    yPosition = yPosition + 30  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function liCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the list item node
+    listItemText = node.content  ' Assuming the content holds the text for the list item
+
+    ' Create a new Label node for the list item
+    listItemNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content for the list item
+    listItemNode.SetField("text", listItemText)
+
+    ' Set additional styling if desired
+    listItemNode.SetField("fontSize", "16px")  ' Adjust size as needed
+    listItemNode.SetField("color", "black")     ' Example color
+
+    ' Set the position of the list item
+    listItemNode.SetField("translation", [0, yPosition])
+
+    ' Append the list item node to the parent node
+    parentNode.AddChild(listItemNode)
+
+    ' Update the yPosition based on the height of the list item
+    yPosition = yPosition + 30  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function linkCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the attributes from the link node
+    linkText = node.content  ' The text to display for the link
+    linkAttributes = node.attributes  ' Assuming attributes include href, target, etc.
+
+    ' Create a new Button node for the link
+    linkNode = CreateObject("roSGNode", "Button")
+
+    ' Set the button text
+    linkNode.SetField("text", linkText)
+
+    ' Set the link's destination (href)
+    if linkAttributes.hasKey("href")
+        linkNode.SetField("url", linkAttributes.href)  ' This might require custom logic to handle navigation
+    end if
+
+    ' Set additional styles if needed
+    linkNode.SetField("fontSize", "16px")  ' Adjust size as needed
+    linkNode.SetField("color", "blue")      ' Example color for links
+
+    ' Set the position of the link node
+    linkNode.SetField("translation", [0, yPosition])
+    
+    ' Append the link node to the parent node
+    parentNode.AddChild(linkNode)
+
+    ' Update the yPosition based on the height of the link
+    yPosition = yPosition + 30  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function mainCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node for the main content
+    mainNode = CreateObject("roSGNode", "Group")
+
+    ' Set the position of the main node
+    mainNode.SetField("translation", [0, yPosition])
+
+    ' Append the main node to the parent node
+    parentNode.AddChild(mainNode)
+
+    ' Iterate through child nodes of the main element
+    for each childNode in node.children
+        ' Render each child node within the main node
+        yPosition = renderHTMLTree(childNode, mainNode, yPosition)
+    end for
+
+    ' Update yPosition based on the height of the main content
+    ' This can be adjusted based on the actual rendered height
+    yPosition = yPosition + 30  ' Adjust height increment if necessary
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function mapCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node for the map content
+    mapNode = CreateObject("roSGNode", "Group")
+
+    ' Set the position of the map node
+    mapNode.SetField("translation", [0, yPosition])
+
+    ' Append the map node to the parent node
+    parentNode.AddChild(mapNode)
+
+    ' Iterate through area elements in the map
+    for each areaNode in node.children
+        ' Assuming areaNode has attributes like href, coords, and alt
+        if areaNode.type = "area"
+            areaAttributes = areaNode.attributes
+
+            ' Create a clickable area representation (using Button or another node)
+            clickableArea = CreateObject("roSGNode", "Button")
+            clickableArea.SetField("text", areaAttributes.alt)  ' Use the alt text for the button
+
+            ' Set additional attributes if needed
+            clickableArea.SetField("translation", [areaAttributes.coords[0], areaAttributes.coords[1]])  ' Adjust based on coords
+            clickableArea.SetField("action", areaAttributes.href)  ' Link the area to its URL
+
+            ' Append the clickable area to the map node
+            mapNode.AddChild(clickableArea)
+
+            ' Update yPosition based on the area height
+            yPosition = yPosition + 30  ' Adjust height increment as needed
+        end if
+    end for
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function markCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the mark node
+    markContent = node.content
+
+    ' Create a new Group node for the mark content
+    markNode = CreateObject("roSGNode", "Group")
+
+    ' Set the position of the mark node
+    markNode.SetField("translation", [0, yPosition])
+
+    ' Create a new Label node for the highlighted text
+    highlightedText = CreateObject("roSGNode", "Label")
+    highlightedText.SetField("text", markContent)  ' Set the text content
+    highlightedText.SetField("fontSize", "16px")   ' Adjust size as needed
+    highlightedText.SetField("color", "black")      ' Text color
+    highlightedText.SetField("backgroundColor", "yellow")  ' Highlight background color
+
+    ' Append the highlighted text node to the mark node
+    markNode.AddChild(highlightedText)
+
+    ' Append the mark node to the parent node
+    parentNode.AddChild(markNode)
+
+    ' Update the yPosition based on the height of the mark node
+    yPosition = yPosition + 30  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+function marqueeCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the marquee node
+    marqueeText = node.content
+
+    ' Create a new Group node for the marquee
+    marqueeNode = CreateObject("roSGNode", "Group")
+
+    ' Create a new Label node for the scrolling text
+    scrollingText = CreateObject("roSGNode", "Label")
+    scrollingText.SetField("text", marqueeText)  ' Set the marquee text content
+    scrollingText.SetField("fontSize", "20px")    ' Adjust size as needed
+    scrollingText.SetField("color", "black")      ' Text color
+
+    ' Set the initial translation position for the scrolling effect
+    scrollingText.SetField("translation", [800, yPosition])  ' Start position (off the right side of the screen)
+
+    ' Append the scrolling text node to the marquee node
+    marqueeNode.AddChild(scrollingText)
+
+    ' Append the marquee node to the parent node
+    parentNode.AddChild(marqueeNode)
+
+    ' Create an animation for the scrolling effect
+    animation = CreateObject("roSGNode", "Animation")
+    animation.SetField("duration", 10000)  ' Duration of the scrolling (adjust as needed)
+    animation.SetField("repeatCount", 0)     ' Infinite repeat
+    animation.SetField("target", scrollingText)  ' Target node to scroll
+    animation.SetField("properties", {
+        "translation": [ -800, yPosition ]  ' Move text to the left, off the screen
+    })
+
+    ' Add the animation to the parent node
+    parentNode.AddChild(animation)
+
+    ' Update the yPosition based on the height of the marquee
+    yPosition = yPosition + 40  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function menuCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node for the menu
+    menuNode = CreateObject("roSGNode", "Group")
+
+    ' Set the position of the menu node
+    menuNode.SetField("translation", [0, yPosition])
+
+    ' Iterate through child nodes of the menu
+    for each menuItem in node.children
+        ' Create a new Label node for each menu item
+        itemNode = CreateObject("roSGNode", "Label")
+        
+        ' Set the text content for the menu item
+        itemNode.SetField("text", menuItem.content)  ' Get the content of the menu item
+        itemNode.SetField("fontSize", "18px")        ' Adjust size as needed
+        itemNode.SetField("color", "black")          ' Text color
+
+        ' Append the item node to the menu node
+        menuNode.AddChild(itemNode)
+
+        ' Update the yPosition based on the height of the item node
+        yPosition = yPosition + 30  ' Adjust height increment as needed
+    end for
+
+    ' Append the menu node to the parent node
+    parentNode.AddChild(menuNode)
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function menuitemCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Label node for the menu item
+    menuItemNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content for the menu item
+    menuItemNode.SetField("text", node.content)  ' Get the content of the menu item
+    menuItemNode.SetField("fontSize", "16px")     ' Adjust size as needed
+    menuItemNode.SetField("color", "black")       ' Text color
+
+    ' Set the position of the menu item
+    menuItemNode.SetField("translation", [0, yPosition])
+
+    ' Append the menu item node to the parent node
+    parentNode.AddChild(menuItemNode)
+
+    ' Update the yPosition based on the height of the menu item
+    yPosition = yPosition + 30  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function metaCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Log the meta information (this could be extended based on your needs)
+    if node.hasKey("name") and node.hasKey("content")
+        print "Meta Tag - Name: "; node.name; ", Content: "; node.content
+    else
+        print "Meta Tag with incomplete attributes."
+    end if
+
+    ' Since <meta> tags do not produce visible elements, we simply return the yPosition unchanged
+    return yPosition
+end function
+
+
+function meterCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the attributes from the meter node
+    minValue = 0
+    maxValue = 100
+    value = node.value
+
+    if node.hasKey("min")
+        minValue = node.min
+    end if
+    if node.hasKey("max")
+        maxValue = node.max
+    end if
+    if node.hasKey("value")
+        value = node.value
+    end if
+
+    ' Create a new Group node for the meter
+    meterNode = CreateObject("roSGNode", "Group")
+    meterNode.SetField("translation", [0, yPosition])
+
+    ' Create a visual representation of the meter
+    barWidth = 200 ' Width of the meter bar
+    barHeight = 20 ' Height of the meter bar
+    meterFillWidth = (barWidth * (value - minValue) / (maxValue - minValue))
+
+    ' Create a background bar
+    backgroundBar = CreateObject("roSGNode", "Rectangle")
+    backgroundBar.SetField("width", barWidth)
+    backgroundBar.SetField("height", barHeight)
+    backgroundBar.SetField("color", "lightgray") ' Background color
+    meterNode.AddChild(backgroundBar)
+
+    ' Create a fill bar to represent the value
+    fillBar = CreateObject("roSGNode", "Rectangle")
+    fillBar.SetField("width", meterFillWidth)
+    fillBar.SetField("height", barHeight)
+    fillBar.SetField("color", "green") ' Fill color
+    meterNode.AddChild(fillBar)
+
+    ' Append the meter node to the parent node
+    parentNode.AddChild(meterNode)
+
+    ' Update the yPosition based on the height of the meter
+    yPosition = yPosition + barHeight + 10 ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function navCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node for the navigation
+    navNode = CreateObject("roSGNode", "Group")
+    navNode.SetField("translation", [0, yPosition])
+
+    ' Iterate through child nodes of the nav element
+    for each childNode in node.children
+        if childNode.type = "a" then
+            ' Create a link node for each anchor element
+            linkNode = CreateObject("roSGNode", "Label")
+            linkNode.SetField("text", childNode.content)  ' Set the link text
+
+            ' Set additional attributes if they exist
+            if childNode.hasKey("href")
+                linkNode.SetField("action", childNode.href)  ' Link target
+            end if
+
+            ' Set styling for the link
+            linkNode.SetField("fontSize", "16px")  ' Adjust size as needed
+            linkNode.SetField("color", "blue")      ' Example color
+            linkNode.SetField("textDecor", "underline")  ' Underline for links
+
+            ' Append the link node to the navigation node
+            navNode.AddChild(linkNode)
+
+            ' Update yPosition based on the height of the link
+            yPosition = yPosition + 30  ' Adjust height increment as needed
+        end if
+    end for
+
+    ' Append the navigation node to the parent node
+    parentNode.AddChild(navNode)
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function nobrCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the nobr node
+    textContent = node.content
+
+    ' Create a new Label node to display the text
+    nobrNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content without line breaks
+    nobrNode.SetField("text", textContent)
+
+    ' Set additional styling if needed
+    nobrNode.SetField("fontSize", "16px")  ' Adjust size as needed
+    nobrNode.SetField("color", "black")     ' Example color
+
+    ' Set the position of the nobr node
+    nobrNode.SetField("translation", [0, yPosition])
+
+    ' Append the nobr node to the parent node
+    parentNode.AddChild(nobrNode)
+
+    ' Update the yPosition based on the height of the nobr node
+    yPosition = yPosition + 30  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function noembedCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the content or fallback message from the noembed node
+    noEmbedContent = node.content
+
+    ' Create a new Label node to display the noembed message
+    noEmbedNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content for the noembed message
+    if noEmbedContent <> invalid
+        noEmbedNode.SetField("text", noEmbedContent)
+    else
+        noEmbedNode.SetField("text", "Embedded content not available.")  ' Default message
+    end if
+
+    ' Set additional styling if needed
+    noEmbedNode.SetField("fontSize", "16px")  ' Adjust size as needed
+    noEmbedNode.SetField("color", "red")       ' Example color for emphasis
+
+    ' Set the position of the noembed node
+    noEmbedNode.SetField("translation", [0, yPosition])
+
+    ' Append the noembed node to the parent node
+    parentNode.AddChild(noEmbedNode)
+
+    ' Update the yPosition based on the height of the noembed node
+    yPosition = yPosition + 30  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function noframesCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the content or fallback message from the noframes node
+    noFramesContent = node.content
+
+    ' Create a new Label node to display the noframes message
+    noFramesNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content for the noframes message
+    if noFramesContent <> invalid
+        noFramesNode.SetField("text", noFramesContent)
+    else
+        noFramesNode.SetField("text", "This content is not available without frames.")  ' Default message
+    end if
+
+    ' Set additional styling if needed
+    noFramesNode.SetField("fontSize", "16px")  ' Adjust size as needed
+    noFramesNode.SetField("color", "blue")      ' Example color for emphasis
+
+    ' Set the position of the noframes node
+    noFramesNode.SetField("translation", [0, yPosition])
+
+    ' Append the noframes node to the parent node
+    parentNode.AddChild(noFramesNode)
+
+    ' Update the yPosition based on the height of the noframes node
+    yPosition = yPosition + 30  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function noscriptCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the content from the noscript node
+    noScriptContent = node.content
+
+    ' Create a new Label node to display the noscript message
+    noScriptNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content for the noscript message
+    if noScriptContent <> invalid
+        noScriptNode.SetField("text", noScriptContent)
+    else
+        noScriptNode.SetField("text", "JavaScript is required for this content to display properly.")  ' Default message
+    end if
+
+    ' Set additional styling if needed
+    noScriptNode.SetField("fontSize", "16px")  ' Adjust size as needed
+    noScriptNode.SetField("color", "red")       ' Example color for emphasis
+
+    ' Set the position of the noscript node
+    noScriptNode.SetField("translation", [0, yPosition])
+
+    ' Append the noscript node to the parent node
+    parentNode.AddChild(noScriptNode)
+
+    ' Update the yPosition based on the height of the noscript node
+    yPosition = yPosition + 30  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function objectCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract attributes from the object node
+    objectAttributes = node.attributes  ' Assuming you have the attributes in the node
+
+    ' Create a new Group node for the object
+    objectNode = CreateObject("roSGNode", "Group")
+
+    ' Set the position of the object node
+    objectNode.SetField("translation", [0, yPosition])
+
+    ' Check for the 'data' attribute to determine the content type
+    if objectAttributes.hasKey("data")
+        objectData = objectAttributes.data
+        objectType = "unknown"  ' Default value for objectType
+        if objectAttributes.hasKey("type")
+            objectType = objectAttributes.type  ' Get type if exists
+        end if
+
+        if objectType = "image"
+            ' Create a Poster node for embedding images
+            imageNode = CreateObject("roSGNode", "Poster")
+            imageNode.SetField("uri", objectData)  ' Set the image URI
+            imageNode.SetField("width", "100%")  ' Set the width as needed
+            imageNode.SetField("height", "auto")  ' Set the height as needed
+            objectNode.AddChild(imageNode)
+
+        else if objectType = "video"
+            ' Create a Video node for embedding video content
+            videoNode = CreateObject("roSGNode", "Video")
+            videoNode.SetField("uri", objectData)  ' Set the video URI
+            objectNode.AddChild(videoNode)
+
+        else if objectType = "audio"
+            ' Create an Audio node for embedding audio content
+            audioNode = CreateObject("roSGNode", "Audio")
+            audioNode.SetField("uri", objectData)  ' Set the audio URI
+            objectNode.AddChild(audioNode)
+
+        else
+            ' Handle other object types or unsupported content
+            unsupportedNode = CreateObject("roSGNode", "Label")
+            unsupportedNode.SetField("text", "Unsupported content type: " + objectType)
+            unsupportedNode.SetField("color", "red")  ' Highlight unsupported types
+            objectNode.AddChild(unsupportedNode)
+        end if
+    end if
+
+    ' Append the object node to the parent node
+    parentNode.AddChild(objectNode)
+
+    ' Update the yPosition based on the height of the object node
+    yPosition = yPosition + 40  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function olCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node for the ordered list
+    olNode = CreateObject("roSGNode", "Group")
+
+    ' Set the position of the ordered list node
+    olNode.SetField("translation", [0, yPosition])
+
+    ' Iterate through child nodes of the ordered list
+    for each listItem in node.children
+        if listItem.type = "li" then
+            ' Handle list item
+            liNode = CreateObject("roSGNode", "Label")
+            liNode.SetField("text", listItem.content)  ' Get the list item content
+            liNode.SetField("fontSize", "16px")  ' Adjust size as needed
+            liNode.SetField("color", "black")     ' Example color
+            olNode.AddChild(liNode)
+
+            ' Update yPosition based on the height of the list item
+            yPosition = yPosition + 30  ' Adjust height increment as needed
+        end if
+    end for
+
+    ' Append the ordered list node to the parent node
+    parentNode.AddChild(olNode)
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function optgroupCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node for the option group
+    optgroupNode = CreateObject("roSGNode", "Group")
+
+    ' Set the position of the optgroup node
+    optgroupNode.SetField("translation", [0, yPosition])
+
+    ' Set an optional label for the optgroup (if it exists)
+    if node.hasKey("label")
+        labelNode = CreateObject("roSGNode", "Label")
+        labelNode.SetField("text", node.label)  ' Get the label for the optgroup
+        labelNode.SetField("fontSize", "18px")   ' Adjust size as needed
+        labelNode.SetField("fontWeight", "bold")  ' Make the label bold
+        optgroupNode.AddChild(labelNode)
+
+        ' Update yPosition after adding the label
+        yPosition = yPosition + 25  ' Adjust height increment as needed
+    end if
+
+    ' Iterate through child nodes of the optgroup
+    for each optionNode in node.children
+        if optionNode.type = "option" then
+            ' Handle individual option
+            optionNode = CreateObject("roSGNode", "Label")
+            optionNode.SetField("text", optionNode.content)  ' Get the option content
+            optionNode.SetField("fontSize", "16px")  ' Adjust size as needed
+            optionNode.SetField("color", "black")     ' Example color
+            optgroupNode.AddChild(optionNode)
+
+            ' Update yPosition based on the height of the option
+            yPosition = yPosition + 20  ' Adjust height increment as needed
+        end if
+    end for
+
+    ' Append the optgroup node to the parent node
+    parentNode.AddChild(optgroupNode)
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+function optionCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Label node for the option
+    optionNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content of the option
+    optionNode.SetField("text", node.content)  ' Get the option content
+
+    ' Set optional attributes if they exist
+    if node.hasKey("value")
+        optionNode.SetField("value", node.value)  ' Set the value if available
+    end if
+
+    if node.hasKey("disabled") and node.disabled = true
+        optionNode.SetField("color", "gray")  ' Example style for disabled option
+    else
+        optionNode.SetField("color", "black")  ' Default color for enabled option
+    end if
+
+    ' Set additional styling if needed
+    optionNode.SetField("fontSize", "16px")  ' Adjust size as needed
+
+    ' Append the option node to the parent node
+    parentNode.AddChild(optionNode)
+
+    ' Update the yPosition based on the height of the option node
+    yPosition = yPosition + 20  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function outputCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Label node for the output
+    outputNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content of the output
+    outputNode.SetField("text", node.content)  ' Get the output content
+
+    ' Set optional attributes if they exist
+    if node.hasKey("for")
+        outputNode.SetField("for", node.for)  ' Set the associated input element if available
+    end if
+
+    if node.hasKey("value")
+        outputNode.SetField("value", node.value)  ' Set the value if available
+    end if
+
+    ' Set additional styling if needed
+    outputNode.SetField("fontSize", "18px")  ' Adjust size as needed
+    outputNode.SetField("color", "black")     ' Default text color
+
+    ' Append the output node to the parent node
+    parentNode.AddChild(outputNode)
+
+    ' Update the yPosition based on the height of the output node
+    yPosition = yPosition + 30  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function paragraphCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Label node for the paragraph
+    paragraphNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content of the paragraph
+    paragraphNode.SetField("text", node.content)  ' Get the paragraph content
+
+    ' Set optional styling attributes
+    paragraphNode.SetField("fontSize", "16px")  ' Adjust size as needed
+    paragraphNode.SetField("color", "black")     ' Default text color
+    paragraphNode.SetField("textAlign", "left")  ' Align text to the left
+    paragraphNode.SetField("paddingBottom", "10px")  ' Add some space below the paragraph
+
+    ' Append the paragraph node to the parent node
+    parentNode.AddChild(paragraphNode)
+
+    ' Update the yPosition based on the height of the paragraph node
+    yPosition = yPosition + 40  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function paramCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node for the parameters
+    paramNode = CreateObject("roSGNode", "Group")
+
+    ' Extract the parameters from the node
+    paramName = node.attributes.name
+    paramValue = node.attributes.value  ' Assuming the parameters are in attributes
+
+    ' Create a Label for the parameter name
+    nameLabel = CreateObject("roSGNode", "Label")
+    nameLabel.SetField("text", paramName)  ' Set the name of the parameter
+    nameLabel.SetField("fontSize", "14px")  ' Adjust size as needed
+    nameLabel.SetField("color", "blue")      ' Example color
+    paramNode.AddChild(nameLabel)
+
+    ' Create a Label for the parameter value
+    valueLabel = CreateObject("roSGNode", "Label")
+    valueLabel.SetField("text", paramValue)  ' Set the value of the parameter
+    valueLabel.SetField("fontSize", "14px")   ' Adjust size as needed
+    valueLabel.SetField("color", "gray")      ' Example color
+    paramNode.AddChild(valueLabel)
+
+    ' Append the param node to the parent node
+    parentNode.AddChild(paramNode)
+
+    ' Update the yPosition based on the height of the parameter labels
+    yPosition = yPosition + 40  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function pictureCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node to hold the picture and its sources
+    pictureNode = CreateObject("roSGNode", "Group")
+
+    ' Iterate through the source nodes in the picture
+    for each sourceNode in node.children
+        if sourceNode.type = "source" then
+            ' Extract the src attribute from the source node
+            src = sourceNode.attributes.src
+            
+            ' Create a Poster node to display the image
+            posterNode = CreateObject("roSGNode", "Poster")
+            posterNode.SetField("uri", src)  ' Set the image URI
+
+            ' Optionally set alt text if available
+            if sourceNode.attributes.hasKey("alt")
+                posterNode.SetField("alt", sourceNode.attributes.alt)
+            end if
+
+            ' Append the poster node to the picture node
+            pictureNode.AddChild(posterNode)
+        end if
+    end for
+
+    ' Append the picture node to the parent node
+    parentNode.AddChild(pictureNode)
+
+    ' Update the yPosition based on the height of the poster node
+    yPosition = yPosition + 200  ' Adjust height increment based on expected height of images
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+function plaintextCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the plaintext node
+    plaintextContent = node.content
+
+    ' Create a new Text node to display the plaintext content
+    textNode = CreateObject("roSGNode", "Label") ' Change to appropriate node if needed
+
+    ' Set the text content
+    textNode.SetField("text", plaintextContent)
+
+    ' Optionally set additional styling (e.g., font size)
+    textNode.SetField("fontSize", "16px")  ' Adjust size as needed
+    textNode.SetField("color", "black")     ' Example color
+
+    ' Append the text node to the parent node
+    parentNode.AddChild(textNode)
+
+    ' Update the yPosition based on the height of the text node
+    yPosition = yPosition + 30  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function preCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the pre node
+    preContent = node.content
+
+    ' Create a new Text node to display the preformatted content
+    textNode = CreateObject("roSGNode", "Label")  ' Use Label or appropriate node type
+
+    ' Set the text content, ensuring it retains whitespace and line breaks
+    textNode.SetField("text", preContent)
+
+    ' Optionally set additional styling for the preformatted text
+    textNode.SetField("fontSize", "14px")  ' Adjust size as needed
+    textNode.SetField("color", "black")     ' Example color
+    textNode.SetField("fontFamily", "Courier New")  ' Use a monospaced font
+
+    ' Append the text node to the parent node
+    parentNode.AddChild(textNode)
+
+    ' Update the yPosition based on the height of the text node
+    yPosition = yPosition + 40  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function progressCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract attributes from the progress node
+    progressValue = node.value  ' Current value of the progress
+    progressMax = node.max      ' Maximum value of the progress
+
+    ' Create a new Group node to hold the progress elements
+    progressNode = CreateObject("roSGNode", "Group")
+
+    ' Create a Label for the progress bar
+    progressLabel = CreateObject("roSGNode", "Label")
+    progressLabel.SetField("text", "Progress: " + progressValue + "/" + progressMax)
+
+    ' Set additional styling for the label
+    progressLabel.SetField("fontSize", "16px")  ' Adjust size as needed
+    progressLabel.SetField("color", "black")     ' Example color
+    progressLabel.SetField("translation", [0, yPosition])  ' Set position
+
+    ' Append the label to the progress node
+    progressNode.AddChild(progressLabel)
+
+    ' Create a visual representation of the progress
+    progressBar = CreateObject("roSGNode", "Rectangle")
+    progressBar.SetField("width", 200)  ' Set width of the progress bar
+    progressBar.SetField("height", 20)   ' Set height of the progress bar
+    progressBar.SetField("backgroundColor", "lightgray")  ' Background color
+
+    ' Set the width of the filled part of the progress bar based on progress value
+    filledWidth = (progressValue / progressMax) * 200  ' Calculate filled width
+    filledRectangle = CreateObject("roSGNode", "Rectangle")
+    filledRectangle.SetField("width", filledWidth)
+    filledRectangle.SetField("height", 20)
+    filledRectangle.SetField("backgroundColor", "green")  ' Fill color
+
+    ' Append the filled rectangle to the progress bar
+    progressBar.AddChild(filledRectangle)
+
+    ' Set the position of the progress bar
+    progressBar.SetField("translation", [0, yPosition + 30])  ' Adjust position below the label
+
+    ' Append the progress bar to the progress node
+    progressNode.AddChild(progressBar)
+
+    ' Append the progress node to the parent node
+    parentNode.AddChild(progressNode)
+
+    ' Update the yPosition based on the height of the progress elements
+    yPosition = yPosition + 70  ' Adjust height increment as needed for the label and progress bar
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function qCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the <q> node
+    quoteContent = node.content  ' Get the quotation content
+
+    ' Create a new Label node for the quotation
+    quoteLabel = CreateObject("roSGNode", "Label")
+
+    ' Set the text content for the quote
+    quoteLabel.SetField("text", quoteContent)
+
+    ' Set additional styling for the quote label
+    quoteLabel.SetField("fontSize", "16px")  ' Adjust size as needed
+    quoteLabel.SetField("color", "gray")      ' Change text color if needed
+    quoteLabel.SetField("textAlign", "center") ' Center align the text
+
+    ' Set the position of the quote label
+    quoteLabel.SetField("translation", [0, yPosition])
+
+    ' Append the quote label to the parent node
+    parentNode.AddChild(quoteLabel)
+
+    ' Update the yPosition based on the height of the quote label
+    yPosition = yPosition + 30  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+function rbCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the <rb> node
+    rbContent = node.content  ' Get the ruby base text content
+
+    ' Create a new Label node for the ruby base
+    rbLabel = CreateObject("roSGNode", "Label")
+
+    ' Set the text content for the rb element
+    rbLabel.SetField("text", rbContent)
+
+    ' Set additional styling for the rb label
+    rbLabel.SetField("fontSize", "14px")  ' Adjust size as needed
+    rbLabel.SetField("color", "black")     ' Change text color if needed
+
+    ' Set the position of the rb label
+    rbLabel.SetField("translation", [0, yPosition])
+
+    ' Append the rb label to the parent node
+    parentNode.AddChild(rbLabel)
+
+    ' Update the yPosition based on the height of the rb label
+    yPosition = yPosition + 20  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function rpCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the <rp> node
+    rpContent = node.content  ' Get the text content (usually parentheses)
+
+    ' Create a new Label node for the ruby parenthesis
+    rpLabel = CreateObject("roSGNode", "Label")
+
+    ' Set the text content for the rp element
+    rpLabel.SetField("text", rpContent)
+
+    ' Set additional styling for the rp label
+    rpLabel.SetField("fontSize", "14px")  ' Adjust size as needed
+    rpLabel.SetField("color", "gray")      ' Change text color if needed
+
+    ' Set the position of the rp label
+    rpLabel.SetField("translation", [0, yPosition])
+
+    ' Append the rp label to the parent node
+    parentNode.AddChild(rpLabel)
+
+    ' Update the yPosition based on the height of the rp label
+    yPosition = yPosition + 20  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function rtCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the <rt> node
+    rtContent = node.content  ' Get the phonetic annotation content
+
+    ' Create a new Label node for the ruby text
+    rtLabel = CreateObject("roSGNode", "Label")
+
+    ' Set the text content for the rt element
+    rtLabel.SetField("text", rtContent)
+
+    ' Set additional styling for the rt label
+    rtLabel.SetField("fontSize", "12px")  ' Adjust size as needed
+    rtLabel.SetField("color", "blue")      ' Change text color if needed
+
+    ' Set the position of the rt label
+    rtLabel.SetField("translation", [0, yPosition])
+
+    ' Append the rt label to the parent node
+    parentNode.AddChild(rtLabel)
+
+    ' Update the yPosition based on the height of the rt label
+    yPosition = yPosition + 15  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function rtcCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the <rtc> node
+    rtcContent = node.content  ' Get the content for the ruby text container
+
+    ' Create a new Label node for the ruby text container
+    rtcLabel = CreateObject("roSGNode", "Label")
+
+    ' Set the text content for the rtc element
+    rtcLabel.SetField("text", rtcContent)
+
+    ' Set additional styling for the rtc label
+    rtcLabel.SetField("fontSize", "12px")  ' Adjust size as needed
+    rtcLabel.SetField("color", "green")     ' Change text color if needed
+
+    ' Set the position of the rtc label
+    rtcLabel.SetField("translation", [0, yPosition])
+
+    ' Append the rtc label to the parent node
+    parentNode.AddChild(rtcLabel)
+
+    ' Update the yPosition based on the height of the rtc label
+    yPosition = yPosition + 15  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function rubyCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node to contain the ruby elements
+    rubyNode = CreateObject("roSGNode", "Group")
+
+    ' Set the position of the ruby node
+    rubyNode.SetField("translation", [0, yPosition])
+
+    ' Iterate through child nodes of the ruby
+    for each childNode in node.children
+        if childNode.type = "rb" then
+            ' Handle ruby base text
+            rbLabel = CreateObject("roSGNode", "Label")
+            rbLabel.SetField("text", childNode.content)  ' Set the base text
+            rbLabel.SetField("fontSize", "16px")  ' Adjust size as needed
+            rubyNode.AddChild(rbLabel)
+
+            ' Update yPosition after adding the ruby base text
+            yPosition = yPosition + 20  ' Adjust height increment as needed
+
+        else if childNode.type = "rt" or childNode.type = "rtc" then
+            ' Handle ruby text (pronunciation)
+            rubyTextNode = CreateObject("roSGNode", "Label")
+            rubyTextNode.SetField("text", childNode.content)  ' Set the ruby text
+            rubyTextNode.SetField("fontSize", "12px")  ' Adjust size as needed
+            rubyTextNode.SetField("color", "gray")      ' Example color
+            rubyNode.AddChild(rubyTextNode)
+
+            ' Update yPosition after adding the ruby text
+            yPosition = yPosition + 15  ' Adjust height increment as needed
+        end if
+    end for
+
+    ' Append the ruby node to the parent node
+    parentNode.AddChild(rubyNode)
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function sCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Label node for the strikethrough text
+    strikethroughNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content from the s node
+    strikethroughNode.SetField("text", node.content)  ' Set the text content
+
+    ' Set styling for strikethrough effect
+    strikethroughNode.SetField("fontSize", "16px")  ' Adjust size as needed
+    strikethroughNode.SetField("color", "red")       ' Example color
+    strikethroughNode.SetField("textDecoration", "line-through")  ' Apply strikethrough
+
+    ' Set the position of the strikethrough node
+    strikethroughNode.SetField("translation", [0, yPosition])
+    
+    ' Append the strikethrough node to the parent node
+    parentNode.AddChild(strikethroughNode)
+
+    ' Update yPosition based on the height of the strikethrough text
+    yPosition = yPosition + 30  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function sampCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Label node for the sample text
+    sampleNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content from the samp node
+    sampleNode.SetField("text", node.content)  ' Set the text content
+
+    ' Set styling for the sample output
+    sampleNode.SetField("fontSize", "16px")  ' Adjust size as needed
+    sampleNode.SetField("color", "green")     ' Example color to indicate sample output
+    sampleNode.SetField("fontFamily", "monospace")  ' Use a monospace font
+
+    ' Set the position of the sample output node
+    sampleNode.SetField("translation", [0, yPosition])
+    
+    ' Append the sample node to the parent node
+    parentNode.AddChild(sampleNode)
+
+    ' Update yPosition based on the height of the sample text
+    yPosition = yPosition + 30  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function scriptCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Label node to indicate the script content
+    scriptNode = CreateObject("roSGNode", "Label")
+
+    ' Set a message indicating a script tag
+    scriptNode.SetField("text", "Script content is not rendered: " + node.content)  ' Display the script content
+
+    ' Set styling for the script output
+    scriptNode.SetField("fontSize", "14px")  ' Adjust size as needed
+    scriptNode.SetField("color", "red")       ' Example color for script warnings
+    scriptNode.SetField("fontFamily", "monospace")  ' Use a monospace font for clarity
+
+    ' Set the position of the script output node
+    scriptNode.SetField("translation", [0, yPosition])
+
+    ' Append the script node to the parent node
+    parentNode.AddChild(scriptNode)
+
+    ' Update yPosition based on the height of the script message
+    yPosition = yPosition + 30  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function sectionCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node for the section
+    sectionNode = CreateObject("roSGNode", "Group")
+
+    ' Set the position of the section node
+    sectionNode.SetField("translation", [0, yPosition])
+
+    ' Iterate through child nodes of the section
+    for each childNode in node.children
+        ' Render child nodes recursively within the section
+        yPosition = renderHTMLTree(childNode, sectionNode, yPosition)  ' Use your existing render function
+    end for
+
+    ' Append the section node to the parent node
+    parentNode.AddChild(sectionNode)
+
+    ' Update yPosition based on the last child node added
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function selectCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node for the select dropdown
+    selectNode = CreateObject("roSGNode", "Group")
+
+    ' Set the position of the select node
+    selectNode.SetField("translation", [0, yPosition])
+
+    ' Create a label for the dropdown
+    labelNode = CreateObject("roSGNode", "Label")
+    labelNode.SetField("text", "Select an option:")  ' Display text for the select
+    labelNode.SetField("fontSize", "18px")
+    labelNode.SetField("translation", [0, 0])  ' Position the label above the dropdown
+    selectNode.AddChild(labelNode)
+
+    ' Create a Group or Row to hold the options visually
+    optionsNode = CreateObject("roSGNode", "Group")
+
+    ' Iterate through child nodes of the select
+    for each childNode in node.children
+        if childNode.type = "option" then
+            ' Create a new Label node for each option in the select
+            optionNode = CreateObject("roSGNode", "Label")
+            optionNode.SetField("text", childNode.content)  ' Set the display text for the option
+
+            ' Set the value for the option if available
+            if childNode.hasKey("value")
+                optionNode.SetField("value", childNode.value)
+            end if
+
+            ' Append the option node to the options node
+            optionsNode.AddChild(optionNode)
+
+            ' Update yPosition for the next item
+            yPosition = yPosition + 30 ' Adjust height increment as needed
+        end if
+    end for
+
+    ' Append the options node to the select node
+    selectNode.AddChild(optionsNode)
+
+    ' Append the select node to the parent node
+    parentNode.AddChild(selectNode)
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+
+function slotCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node for the slot
+    slotNode = CreateObject("roSGNode", "Group")
+
+    ' Set the position of the slot node
+    slotNode.SetField("translation", [0, yPosition])
+
+    ' Optionally, you can set additional properties or styles for the slot
+    slotNode.SetField("name", node.attributes.name)  ' Set the name of the slot if available
+
+    ' Append the slot node to the parent node
+    parentNode.AddChild(slotNode)
+
+    ' Update yPosition for the next element
+    yPosition = yPosition + 40  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function smallCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the small node
+    smallTextContent = node.content
+
+    ' Create a new Label node for the small text
+    smallNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content with smaller font size
+    smallNode.SetField("text", smallTextContent)
+    smallNode.SetField("fontSize", "12px")  ' Adjust size as needed
+    smallNode.SetField("color", "gray")      ' Optional: Change color if needed
+
+    ' Set the position of the small text node
+    smallNode.SetField("translation", [0, yPosition])
+    
+    ' Append the small text node to the parent node
+    parentNode.AddChild(smallNode)
+
+    ' Update the yPosition based on the height of the small text node
+    yPosition = yPosition + 20  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function sourceCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract attributes from the source node
+    sourceAttributes = node.attributes
+
+    ' Check if the source type and src are provided
+    if sourceAttributes.hasKey("src") and sourceAttributes.hasKey("type")
+        ' Create a new Label node to display the source information
+        sourceNode = CreateObject("roSGNode", "Label")
+
+        ' Set the text content to display source information
+        sourceNode.SetField("text", "Source: " + sourceAttributes.src + " (Type: " + sourceAttributes.type + ")")
+        sourceNode.SetField("fontSize", "14px")  ' Adjust size as needed
+        sourceNode.SetField("color", "black")     ' Example color
+
+        ' Set the position of the source node
+        sourceNode.SetField("translation", [0, yPosition])
+        
+        ' Append the source node to the parent node
+        parentNode.AddChild(sourceNode)
+
+        ' Update the yPosition based on the height of the source node
+        yPosition = yPosition + 25  ' Adjust height increment as needed
+    else
+        print "Warning: Missing src or type attribute in source node"
+    end if
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function spanCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the span node
+    spanText = node.content
+
+    ' Create a new Label node for the span text
+    spanNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content
+    spanNode.SetField("text", spanText)
+
+    ' Set additional styling (optional)
+    spanNode.SetField("fontSize", "16px")  ' Adjust size as needed
+    spanNode.SetField("color", "black")     ' Example color
+
+    ' Set the position of the span node
+    spanNode.SetField("translation", [0, yPosition])
+
+    ' Append the span node to the parent node
+    parentNode.AddChild(spanNode)
+
+    ' Update the yPosition based on the height of the span node
+    yPosition = yPosition + 20  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function strikeCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the strike node
+    strikeText = node.content
+
+    ' Create a new Label node for the struck-through text
+    strikeNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content
+    strikeNode.SetField("text", strikeText)
+
+    ' Set additional styling for strikethrough
+    strikeNode.SetField("fontSize", "16px")  ' Adjust size as needed
+    strikeNode.SetField("color", "red")       ' Example color
+    strikeNode.SetField("textDecoration", "line-through")  ' Apply strikethrough style
+
+    ' Set the position of the strike node
+    strikeNode.SetField("translation", [0, yPosition])
+
+    ' Append the strike node to the parent node
+    parentNode.AddChild(strikeNode)
+
+    ' Update the yPosition based on the height of the strike node
+    yPosition = yPosition + 20  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function strongCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the strong node
+    strongText = node.content
+
+    ' Create a new Label node for the strong text
+    strongNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content
+    strongNode.SetField("text", strongText)
+
+    ' Set additional styling for strong emphasis
+    strongNode.SetField("fontSize", "18px")  ' Adjust size as needed
+    strongNode.SetField("fontWeight", "bold")  ' Make the text bold
+    strongNode.SetField("color", "black")       ' Example color
+
+    ' Set the position of the strong node
+    strongNode.SetField("translation", [0, yPosition])
+
+    ' Append the strong node to the parent node
+    parentNode.AddChild(strongNode)
+
+    ' Update the yPosition based on the height of the strong node
+    yPosition = yPosition + 20  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function styleCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the CSS content from the style node
+    cssContent = node.content
+
+    ' Create a new Label node to display the CSS content (if needed for visibility)
+    cssNode = CreateObject("roSGNode", "Label")
+
+    ' Set the CSS content as text (optional, for debugging or visibility)
+    cssNode.SetField("text", cssContent)
+
+    ' Set additional styling for the CSS label (optional)
+    cssNode.SetField("fontSize", "14px")  ' Adjust size as needed
+    cssNode.SetField("color", "gray")      ' Example color for CSS text
+
+    ' Set the position of the CSS node
+    cssNode.SetField("translation", [0, yPosition])
+
+    ' Append the CSS node to the parent node (for visibility)
+    parentNode.AddChild(cssNode)
+
+    ' Here you can process the cssContent to apply styles dynamically to nodes
+    ' This part is typically not straightforward, as you would need to parse
+    ' the CSS and apply styles to corresponding nodes based on class or id selectors.
+    ' For now, we'll simply print the CSS to show it's captured.
+    print "Captured CSS: "; cssContent
+
+    ' Update the yPosition based on the height of the CSS node
+    yPosition = yPosition + 20  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function subCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the sub node
+    subContent = node.content
+
+    ' Create a new Label node for the subscript
+    subNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content for the subscript
+    subNode.SetField("text", subContent)
+
+    ' Set the style for the subscript (smaller font size)
+    subNode.SetField("fontSize", "14px")  ' Adjust size as needed
+    subNode.SetField("color", "black")     ' Set color, can be adjusted
+
+    ' Set the position of the subscript
+    subNode.SetField("translation", [0, yPosition])
+
+    ' Append the subscript node to the parent node
+    parentNode.AddChild(subNode)
+
+    ' Update the yPosition based on the height of the subscript node
+    yPosition = yPosition + 20  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function summaryCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the summary node
+    summaryContent = node.content
+
+    ' Create a new Label node for the summary
+    summaryNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content for the summary
+    summaryNode.SetField("text", summaryContent)
+
+    ' Set additional styling for the summary
+    summaryNode.SetField("fontSize", "16px")  ' Adjust size as needed
+    summaryNode.SetField("color", "black")     ' Set color
+
+    ' Set the position of the summary node
+    summaryNode.SetField("translation", [0, yPosition])
+
+    ' Append the summary node to the parent node
+    parentNode.AddChild(summaryNode)
+
+    ' Update the yPosition based on the height of the summary node
+    yPosition = yPosition + 30  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function supCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the sup node
+    supContent = node.content
+
+    ' Create a new Label node for the superscript
+    supNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content for the superscript
+    supNode.SetField("text", supContent)
+
+    ' Set additional styling for the superscript
+    supNode.SetField("fontSize", "12px")  ' Adjust size as needed
+    supNode.SetField("color", "black")     ' Set color
+    supNode.SetField("baselineShift", "super")  ' Positioning for superscript effect
+
+    ' Set the position of the superscript node
+    supNode.SetField("translation", [0, yPosition])
+
+    ' Append the superscript node to the parent node
+    parentNode.AddChild(supNode)
+
+    ' Update the yPosition based on the height of the superscript node
+    yPosition = yPosition + 15  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function svgCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node to contain the SVG image
+    svgGroupNode = CreateObject("roSGNode", "Group")
+
+    ' Create a Poster node to display the SVG
+    posterNode = CreateObject("roSGNode", "Poster")
+
+    ' Set the source of the poster to the SVG file or data
+    if node.hasKey("src")
+        posterNode.SetField("uri", node.src)  ' Set the URI to load the SVG
+    end if
+
+    ' Set additional attributes for the poster if necessary
+    if node.hasKey("width")
+        posterNode.SetField("width", node.width)
+    end if
+
+    if node.hasKey("height")
+        posterNode.SetField("height", node.height)
+    end if
+
+    ' Append the poster node to the group
+    svgGroupNode.AddChild(posterNode)
+
+    ' Set the position of the group node
+    svgGroupNode.SetField("translation", [0, yPosition])
+
+    ' Append the group node to the parent node
+    parentNode.AddChild(svgGroupNode)
+
+    ' Update the yPosition based on the height of the poster node
+    yPosition = yPosition + 50  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function tableCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node for the table
+    tableNode = CreateObject("roSGNode", "Group")
+
+    ' Set the position of the table node
+    tableNode.SetField("translation", [0, yPosition])
+
+    ' Iterate through child nodes of the table (usually tbody, thead, etc.)
+    for each childNode in node.children
+        if childNode.type = "thead" or childNode.type = "tbody" then
+            ' Create a new Group for the row (tr)
+            rowNode = CreateObject("roSGNode", "Group")
+
+            for each row in childNode.children
+                if row.type = "tr" then
+                    ' Create a new Group for each table row
+                    trNode = CreateObject("roSGNode", "Group")
+                    
+                    for each cell in row.children
+                        if cell.type = "td" then
+                            ' Handle table data cells
+                            cellNode = CreateObject("roSGNode", "Label") ' Use Label for td
+                            cellNode.SetField("text", cell.content)
+                            cellNode.SetField("fontSize", "16px")  ' Adjust size as needed
+                            trNode.AddChild(cellNode)
+                            
+                        else if cell.type = "th" then
+                            ' Handle table header cells
+                            headerCellNode = CreateObject("roSGNode", "Label") ' Use Label for th
+                            headerCellNode.SetField("text", cell.content)
+                            headerCellNode.SetField("fontSize", "18px")  ' Adjust size as needed
+                            headerCellNode.SetField("fontWeight", "bold")  ' Make it bold
+                            trNode.AddChild(headerCellNode)
+                        end if
+                    end for
+                    
+                    ' Add the row to the rowNode
+                    rowNode.AddChild(trNode)
+                end if
+            end for
+
+            ' Append the row node to the table node
+            tableNode.AddChild(rowNode)
+        end if
+    end for
+
+    ' Append the table node to the parent node
+    parentNode.AddChild(tableNode)
+
+    ' Update the yPosition based on the number of rows added
+    yPosition = yPosition + (30 * node.children.count()) ' Adjust based on your layout needs
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+function tbodyCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node for the tbody
+    tbodyNode = CreateObject("roSGNode", "Group")
+
+    ' Set the position of the tbody node
+    tbodyNode.SetField("translation", [0, yPosition])
+
+    ' Iterate through child nodes of the tbody
+    for each rowNode in node.children
+        if rowNode.type = "tr" then
+            ' Create a new Group for each table row
+            trNode = CreateObject("roSGNode", "Group")
+            
+            for each cellNode in rowNode.children
+                if cellNode.type = "td" then
+                    ' Handle table data cells (td)
+                    cell = CreateObject("roSGNode", "Label")  ' Use Label for td
+                    cell.SetField("text", cellNode.content)  ' Set the text content for the cell
+                    cell.SetField("fontSize", "16px")  ' Adjust size as needed
+                    cell.SetField("color", "black")  ' Example color
+                    trNode.AddChild(cell)  ' Add cell to the row node
+
+                else if cellNode.type = "th" then
+                    ' Handle table header cells (th)
+                    headerCell = CreateObject("roSGNode", "Label")  ' Use Label for th
+                    headerCell.SetField("text", cellNode.content)  ' Set the text content for the header cell
+                    headerCell.SetField("fontSize", "18px")  ' Adjust size as needed
+                    headerCell.SetField("fontWeight", "bold")  ' Make it bold
+                    trNode.AddChild(headerCell)  ' Add header cell to the row node
+                end if
+            end for
+            
+            ' Append the row node to the tbody node
+            tbodyNode.AddChild(trNode)
+            
+            ' Update yPosition based on the height of the row
+            yPosition = yPosition + 30  ' Adjust height increment as needed
+        end if
+    end for
+
+    ' Append the tbody node to the parent node
+    parentNode.AddChild(tbodyNode)
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function tdCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Label node for the table cell
+    tdNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content of the cell
+    tdNode.SetField("text", node.content)
+
+    ' Set additional styling for the table cell
+    tdNode.SetField("fontSize", "16px")  ' Adjust size as needed
+    tdNode.SetField("color", "black")     ' Example color
+
+    ' Set the position of the td node
+    tdNode.SetField("translation", [0, yPosition])
+
+    ' Append the td node to the parent node (which should be the row node)
+    parentNode.AddChild(tdNode)
+
+    ' Update yPosition based on the height of the table cell
+    yPosition = yPosition + 30  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function templateCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node for the template content
+    templateNode = CreateObject("roSGNode", "Group")
+
+    ' Set the position of the template node
+    templateNode.SetField("translation", [0, yPosition])
+
+    ' Iterate through child nodes of the template
+    for each childNode in node.children
+        ' Call renderHTMLTree to render child nodes into the template
+        yPosition = renderHTMLTree(childNode, templateNode, yPosition)
+    end for
+
+    ' Append the template node to the parent node
+    parentNode.AddChild(templateNode)
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function textareaCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Label node for the textarea content
+    labelNode = CreateObject("roSGNode", "Label")
+    
+    ' Assuming you have the content in the node
+    labelNode.SetField("text", node.content)  ' Set the text content
+
+    ' Set additional styling if desired
+    labelNode.SetField("fontSize", "16px")  ' Adjust size as needed
+    labelNode.SetField("color", "black")     ' Example color
+
+    ' Set the position of the Label node
+    labelNode.SetField("translation", [0, yPosition])
+    parentNode.AddChild(labelNode)
+
+    ' Update the yPosition based on the height of the textarea
+    yPosition = yPosition + 80  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function tfootCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node for the tfoot content
+    tfootNode = CreateObject("roSGNode", "Group")
+
+    ' Set the position of the tfoot node
+    tfootNode.SetField("translation", [0, yPosition])
+
+    ' Iterate through child nodes of the tfoot
+    for each childNode in node.children
+        if childNode.type = "tr" then
+            ' Handle table row (tr)
+            rowNode = CreateObject("roSGNode", "Group")  ' Use Group to represent a row
+
+            ' Set the position of the row node
+            rowNode.SetField("translation", [0, yPosition])
+
+            ' Append the row node to the tfoot node
+            tfootNode.AddChild(rowNode)
+
+            ' Assuming the row may have td elements as children
+            for each cellNode in childNode.children
+                if cellNode.type = "td" then
+                    cellNodeContent = cellNode.content  ' Get the content of the cell
+
+                    ' Create a Label for each cell
+                    cellLabel = CreateObject("roSGNode", "Label")
+                    cellLabel.SetField("text", cellNodeContent)  ' Set the cell content
+                    cellLabel.SetField("translation", [0, 0])  ' Position the cell within the row
+
+                    rowNode.AddChild(cellLabel)
+                end if
+            end for
+
+            ' Update yPosition after adding the row
+            yPosition = yPosition + 30  ' Adjust height increment as needed
+        end if
+    end for
+
+    ' Append the tfoot node to the parent node
+    parentNode.AddChild(tfootNode)
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function thCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the content from the th node
+    headerContent = node.content  ' Assuming the content holds the text for the header
+
+    ' Create a new Label node for the header
+    headerNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content for the header
+    headerNode.SetField("text", headerContent)
+
+    ' Set styling for the header
+    headerNode.SetField("fontSize", "18px")  ' Adjust size as needed
+    headerNode.SetField("fontWeight", "bold")  ' Make the header bold
+    headerNode.SetField("color", "black")  ' Example color
+
+    ' Set the position of the header node
+    headerNode.SetField("translation", [0, yPosition])
+
+    ' Append the header node to the parent node
+    parentNode.AddChild(headerNode)
+
+    ' Update the yPosition based on the height of the header
+    yPosition = yPosition + 30  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function theadCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node for the table header
+    theadNode = CreateObject("roSGNode", "Group")
+
+    ' Set the position of the thead node
+    theadNode.SetField("translation", [0, yPosition])
+
+    ' Iterate through child nodes of the thead
+    for each rowNode in node.children
+        if rowNode.type = "tr" then
+            ' Assuming each row contains <th> elements
+            for each cellNode in rowNode.children
+                if cellNode.type = "th" then
+                    yPosition = thCallback(cellNode, yPosition, theadNode)  ' Call thCallback for each th
+                end if
+            end for
+        end if
+    end for
+
+    ' Append the thead node to the parent node
+    parentNode.AddChild(theadNode)
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+function timeCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Label node for the time element
+    timeNode = CreateObject("roSGNode", "Label")
+
+    ' Extract the text content from the time node
+    timeContent = node.content
+
+    ' Set the text content for the time node
+    timeNode.SetField("text", timeContent)
+
+    ' Set optional styling for the time node
+    timeNode.SetField("fontSize", "16px")  ' Adjust size as needed
+    timeNode.SetField("color", "blue")      ' Example color
+
+    ' Set the position of the time node
+    timeNode.SetField("translation", [0, yPosition])
+    
+    ' Append the time node to the parent node
+    parentNode.AddChild(timeNode)
+
+    ' Update the yPosition based on the height of the time node
+    yPosition = yPosition + 30  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function titleCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Label node for the title element
+    titleNode = CreateObject("roSGNode", "Label")
+
+    ' Extract the text content from the title node
+    titleContent = node.content
+
+    ' Set the text content for the title node
+    titleNode.SetField("text", titleContent)
+
+    ' Set styling for the title node (optional)
+    titleNode.SetField("fontSize", "24px")  ' Adjust size as needed
+    titleNode.SetField("fontWeight", "bold") ' Make the title bold
+    titleNode.SetField("color", "black")      ' Example color
+
+    ' Set the position of the title node
+    titleNode.SetField("translation", [0, yPosition])
+    
+    ' Append the title node to the parent node
+    parentNode.AddChild(titleNode)
+
+    ' Update the yPosition based on the height of the title node
+    yPosition = yPosition + 40  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function trCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node for the table row
+    rowNode = CreateObject("roSGNode", "Group")
+
+    ' Set the position of the row node
+    rowNode.SetField("translation", [0, yPosition])
+
+    ' Iterate through child nodes of the tr
+    for each childNode in node.children
+        if childNode.type = "td" then
+            ' Handle table data cell
+            cellNode = CreateObject("roSGNode", "Label")
+            cellNode.SetField("text", childNode.content)  ' Set the cell content
+            cellNode.SetField("fontSize", "16px")          ' Adjust size as needed
+            cellNode.SetField("padding", "5px")            ' Optional padding
+            rowNode.AddChild(cellNode)
+
+            ' Update yPosition for the next cell in the same row (optional based on layout)
+            yPosition = yPosition  ' yPosition remains the same for cells in the same row
+
+        else if childNode.type = "th" then
+            ' Handle table header cell
+            headerNode = CreateObject("roSGNode", "Label")
+            headerNode.SetField("text", childNode.content)  ' Set the header content
+            headerNode.SetField("fontSize", "16px")          ' Adjust size as needed
+            headerNode.SetField("fontWeight", "bold")        ' Make the header bold
+            rowNode.AddChild(headerNode)
+
+            ' Update yPosition for the next header cell
+            yPosition = yPosition  ' yPosition remains the same for headers in the same row
+        end if
+    end for
+
+    ' Append the row node to the parent node (typically the table)
+    parentNode.AddChild(rowNode)
+
+    ' Update yPosition based on the height of the row (adjust if needed)
+    yPosition = yPosition + 30  ' Adjust height increment as needed for the next row
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function trackCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract attributes from the track node
+    trackAttributes = node.attributes  ' Assuming you have the attributes in the node
+
+    ' Create a new Label node to display track information
+    trackInfoNode = CreateObject("roSGNode", "Label")
+
+    ' Set the default text for the track node
+    trackInfoNode.SetField("text", "Track: " + trackAttributes.kind)  ' Display the kind of track (e.g., subtitles, captions)
+
+    ' Set additional attributes if they exist
+    if trackAttributes.hasKey("label")
+        trackInfoNode.SetField("text", trackAttributes.label)  ' Use the label if provided
+    end if
+
+    if trackAttributes.hasKey("language")
+        trackInfoNode.SetField("fontSize", "14px")            ' Set font size if desired
+        trackInfoNode.SetField("color", "gray")               ' Change color if needed
+    end if
+
+    ' Set the position of the track information
+    trackInfoNode.SetField("translation", [0, yPosition])
+    
+    ' Append the track information node to the parent node
+    parentNode.AddChild(trackInfoNode)
+
+    ' Update yPosition based on the height of the track info node
+    yPosition = yPosition + 25  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function ttCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the tt node
+    ttContent = node.content
+
+    ' Create a new Label node for the teletype text
+    ttNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content for the teletype text
+    ttNode.SetField("text", ttContent)
+
+    ' Set additional styling for the teletype text
+    ttNode.SetField("fontSize", "16px")  ' Adjust size as needed
+    ttNode.SetField("fontFamily", "monospace")  ' Use a monospaced font
+
+    ' Set the position of the teletype text
+    ttNode.SetField("translation", [0, yPosition])
+
+    ' Append the tt node to the parent node
+    parentNode.AddChild(ttNode)
+
+    ' Update the yPosition based on the height of the teletype text node
+    yPosition = yPosition + 30  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function uCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the u node
+    uContent = node.content
+
+    ' Create a new Label node for the underlined text
+    uNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content for the underlined text
+    uNode.SetField("text", uContent)
+
+    ' Set additional styling for the underlined text
+    uNode.SetField("fontSize", "16px")  ' Adjust size as needed
+    uNode.SetField("textDecoration", "underline")  ' Underline the text
+
+    ' Set the position of the underlined text
+    uNode.SetField("translation", [0, yPosition])
+
+    ' Append the u node to the parent node
+    parentNode.AddChild(uNode)
+
+    ' Update the yPosition based on the height of the underlined text node
+    yPosition = yPosition + 30  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function ulCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Group node for the unordered list
+    ulNode = CreateObject("roSGNode", "Group")
+
+    ' Set the position of the unordered list node
+    ulNode.SetField("translation", [0, yPosition])
+
+    ' Iterate through child nodes of the ul
+    for each childNode in node.children
+        if childNode.type = "li" then
+            ' Create a new Label node for each list item
+            liNode = CreateObject("roSGNode", "Label")
+
+            ' Set the text content for the list item
+            liNode.SetField("text", childNode.content)  ' Get the item content
+
+            ' Set additional styling for the list item
+            liNode.SetField("fontSize", "16px")  ' Adjust size as needed
+            liNode.SetField("color", "black")     ' Example color
+
+            ' Append the list item node to the unordered list node
+            ulNode.AddChild(liNode)
+
+            ' Update yPosition for the next item
+            yPosition = yPosition + 30  ' Adjust height increment as needed
+        end if
+    end for
+
+    ' Append the unordered list node to the parent node
+    parentNode.AddChild(ulNode)
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function varCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Label node for the variable
+    varNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content for the variable
+    varNode.SetField("text", node.content)  ' Get the variable content
+
+    ' Set additional styling for the variable
+    varNode.SetField("fontSize", "18px")  ' Adjust size as needed
+    varNode.SetField("fontStyle", "italic")  ' Make the text italic to represent variable notation
+
+    ' Set the position of the variable node
+    varNode.SetField("translation", [0, yPosition])
+
+    ' Append the variable node to the parent node
+    parentNode.AddChild(varNode)
+
+    ' Update the yPosition based on the height of the variable node
+    yPosition = yPosition + 25  ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function videoCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Create a new Video node for the video content
+    videoNode = CreateObject("roSGNode", "Video")
+
+    ' Set the source of the video
+    if node.hasKey("src")
+        videoNode.SetField("url", node.src)  ' Set the video URL
+    end if
+
+    ' Set additional attributes if they exist
+    if node.hasKey("controls")
+        videoNode.SetField("showControls", node.controls)  ' Show controls if specified
+    end if
+
+    if node.hasKey("autoplay")
+        videoNode.SetField("autoplay", node.autoplay)  ' Autoplay the video if specified
+    end if
+
+    if node.hasKey("loop")
+        videoNode.SetField("loop", node.loop)  ' Loop the video if specified
+    end if
+
+    ' Set the position of the video node
+    videoNode.SetField("translation", [0, yPosition])
+
+    ' Append the video node to the parent node
+    parentNode.AddChild(videoNode)
+
+    ' Update the yPosition based on the height of the video node
+    yPosition = yPosition + 220  ' Adjust height increment as needed (you might want to set this based on the video dimensions)
+
+    return yPosition  ' Return the updated yPosition
+end function
+
+
+function wbrCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' The <wbr> element does not require any additional rendering or nodes.
+    ' Simply return the current yPosition without any changes.
+    return yPosition
+end function
+
+
+function xmpCallback(node as Object, yPosition as Integer, parentNode as Object) as Integer
+    print node.type ; "callback"
+    ' Extract the text content from the xmp node
+    xmpContent = node.content
+
+    ' Create a new Label node to display the preformatted text
+    xmpNode = CreateObject("roSGNode", "Label")
+
+    ' Set the text content
+    xmpNode.SetField("text", xmpContent)
+
+    ' Set additional styling for preformatted text
+    xmpNode.SetField("fontSize", "16px")  ' Adjust size as needed
+    xmpNode.SetField("color", "gray")      ' Example color for visibility
+    xmpNode.SetField("textAlign", "left")  ' Align text to the left
+
+    ' Append the xmp node to the parent node
+    parentNode.AddChild(xmpNode)
+
+    ' Update the yPosition based on the height of the xmp node
+    yPosition = yPosition + 50 ' Adjust height increment as needed
+
+    return yPosition  ' Return the updated yPosition
+end function
